@@ -1,8 +1,84 @@
 ![](headers/4-6.jpg)
 # Getting Started
 
-Now, it's time to customize the bottom section of this page.That includes an About, a Contact, and Location sections.So, that corresponds to that section in the source code.So, that is bottom section.And, we're going to be using similar CSS properties that we've been using forthe previous sections.So, it has some similarities except for a few differences.We don't need to refer to any div with a class top, it doesn't include any.So, we have a grid as well, so, for that section.So, we're going to have a multi-column layout.So, that's going to be, actually, customized.We're going to see that in a moment.And, also, we have headings.So, each of the sections, H of the div with an ID,includes an H3, and different other elements.So, we're going to copy the exact same name space to target, so,a few elements with CSS properties provided by the name space.So, the mixins and variables included in the name space, and here you go.So, that is a starting point.It's not complete yet, of course.We're going to make a few adjustments by using our own CSS properties.And, remember that the rule with cascading, is that,anything that comes after will override any other CSS properties that comes first.So, we're going to override a few of the CSS styling thatare provided by the name space.So, the mixins and variable that we have inserted in that name space.So, first we're going to change the default alignment,which is going to be left, in that instance.Also, we're going to change the background color and the text color.And, here it is.So, this is starting to be a little bit different.So, now we're going to format the layout.
+Now, it's time to customize the bottom section of the page. It includes the About, Contact and Location sections. We're going to be using similar CSS properties that we've been using for the previous sections and employ a multi-column layout.
+
+First of all, go ahead and add the same namespace like this:
+
+```less
+#bottom {
+	#commonRules;
+}
+```
+
+That is a starting point for us.
+
+```less
+#bottom {
+ #commonRules;
+ text-align: left;
+ background:@asbestos;
+ color: @light;
+}
+```
 
 # Styling About, Contact & Location section
 
-So, we're going to use, so, these selectors to target the div with specificIDs to create our columns and that's going to be different in that instance.You're going to see that this time, we're going to be using six columns forthe first.And, I'm going to use the same number of columns for the last one, Locations.And, the one in the middle with the ID contact, I'm going to use four.So, you see that it doesn't add up to 12.We are a little bit over, and that's because we don't use the default containerwidth, which is the one with 12 columns.So, we're going to see on the documentation how this is explained.So, you see in that example that there is one variable, which is @total-width,which is going to provide you with a 12-column grid.Then, you can use the value 100% in order to create a fluid layout.So, we're not going to use that in that instance.So, that's going to allow us to use more, to add more columns.And, that's going to fit just fine.Even though the number of columns add up to more than 12, it fits perfectly, so,within the template of the page.So, the layout is a little bit off on the left, so, remember that every time youuse the float properties, you need to turn off the float by using a clearfix hack.So we're going to add this mixin at the bottom, and that's going to fix it.We have a few other elements nested within the first grid.So, the first div, with the ID About.So, we have two divs, that include p elements, so paragraphs.So, we're going to style and customize all forthis once by creating a grid with them.So, meaning that we're going to nest a grid within another grid.So, that is another mixin which is provided by the Semantic Grid system.We're going to start by targeting the div, so,we're going to nest the selector div within the selector ID About.Then, we're going to use the mixin row.And, this one takes one param, parameter, so, that is the value which is similar tothe number of column that you have created for that grid, so, that's going to be six.Then, I'm going to remove the padding-left.And, we're going to nest another selector to target p elements andcreate the nested grid.And, before we go any further in the code, I just want to show you the documentationof the semantic grid system in order to show you how it can create nested grid.Which is a more advanced type of layout.And, here you go, so, right above the sections for Push and Pull,you're going to find the right sections in order to create your nested group.So, in that instance, you're going to be using, again,the mixin column, but this time, it's going to take two parameters.The first parameter will be for the number of column that you want forthe nested grid.Then, the second parameter will be for the same number of colon that you've beenusing for the parent grid, inside of which you want to nest your new grid.So, in that instance, that's going to be three columns.Then, nine columns forthe second parameter because the first grid was of nine columns.So, we're going to put that in practice.So, now, we have our p element.We're going to write, again, the mixin column, which, this time,will take two parameters.So, we're going to start with actually, the second value.So, we're going to, actually, refer to the number of column forthe grid inside of which we want to nest that new grid, so, that's going to be 6.And then, we want, actually, a three-column layout for the paragraph.And, here it is.So, now we have our nested grid.And, I'm going to finish by adding some margins, so, between those paragraphs,those p elements.And, also, we're going to change the style of the font.And, that's going to be italic.And, back to the browser.We're going to be able to see that now, we have a new grid,which is nicely formatted.Here we go.We can read Registered Graphic Designers and Adobe Certified.And, below, we also have a list that we're going to be customizing as well usinga group of codes, which is actually a mixin.So, we're going to back to the code editor in order to see what's available,what's included, in that mixin, in order to customize this section of the design.On the file mixins.less,we have a few additional mixins that are available for this section.So, the first one is actually #inline_list, and you see that we haveCSS properties, like, the font-size, we're using a font-weight as well.And, we are removing the padding-left for whichever elements to which we'reapplying this mixin, and we're targeting also the li and anchor tags.And, you see that for the anchor tags, we're using a mixin,which is grouped inside the namespace.So, this one can only be used within the context of that namespace.So, we have defined this one earlier at the beginning.So, we're going to see which CSS properties are grouped inside thisnamespace.We're going to scroll back to the top.And, here, we can see that we have a namespace navigation,that includes a couple of mixins.So, we're using links_social.And, inside this one, we're using another mixin.We'll see why, in a moment.Then, we have a few CSS properties.And also some information for the other states.So, for the links mixin, so, using it in that mixin particularly allows usto access other CSS properties that have been defined in the first mixin.And, this is a good example of object-oriented CSS,because using this mixin links,allows us to access CSS properties that have been defined in this first mixins.Like, text decoration, the color, that includes this variable,which is asbestos, then padding-left, and transition as well.And, by inserting this one,we can then enter it from the CSS properties of the mixin links.Then, we have decided to have a few differences, like the color,which is light, and a different hover effect.So, by having a darker color, every time we hover over the link.And, let's refresh.And, now, we have a list which is customized.So, we have a twitter handle @webart, andalso the link of the site, the web site of the agency.This has been customized by using, so, this namespace inline list.We're going to continue with the other divs.So, we have the div with the ID contact and also the locations.So, we're just going to be using actually, here as well, so,a few CSS properties that we have already defined.So, we're going to access, so,pieces of code that we have already declared in the mixins.less.So, that is very convenient.And, we have the same type of un-ordered list, so, we're going to target alsowith the same name space and mixin included in that namespace.So, the un-ordered list with the class inline.So, I'm going to copy it from the first div andadd it to this div, this ID selector contact.And, inside the ID contact, I'm going to nest another selector, that's going to beUL to target another un-ordered list, which is the first inside contact.You see where we can read address, phone, and email.So, we're going to remove the padding to the left, and also,we're going to format, so, the list item that we have inside.So, for that, we have another mixin which is available.We're going to read on mixins.less.So, we have this class that includes a few CSS properties.So, we're going to use this one in order to customize the list item, very quickly.And, that's all there is to it.You can then save.That's going to be converted into standard CSS that the browser can process and read.And, that's going to allow us to hear as well format, so, this section Contact.Here we go.We're going to continue with the section far right, Locations.So, we have an unordered list as well, with the class inline.So, we're going to scroll down, so,we're going to be able to see that we have similar layout.We're using as well an unordered list with the class inline.So, basically what we're going to do, we're going to be using as well,so, the same less code.And, we're going to include this one, so, inside the ID selector locations.And, that's it.So, in that section of the course, you could learn how to create very quicklya more advanced type of layout by creating a nested grid within another grid.Then, you could also solidify your knowledge as to how to write a moremaintainable and object-oriented CSS by knowing how to access group of code,using the namespace, then the mixins, and also the variables.
+Now let's format the layout.
+
+```less
+#bottom {
+ #commonRules;
+ text-align: left;
+ background:@asbestos;
+ color: @light;
+
+	#about {
+	.column(6);
+
+		div {
+	 	.row(6);
+	 	padding-left: 0;
+
+	 		p {
+	 			.column(3,6);
+	 			margin: @margin;
+	 			font-style: italic;		 
+	 		}
+	 	}
+
+		.inline {
+			#inline_list;
+		}
+	
+	}
+
+	#contact {
+	.column(4);
+
+		ul  {
+			padding-left:0;
+
+			li {
+			 .list;
+			}
+		}
+
+		 .inline {
+			#inline_list;
+		}
+	} 
+	
+	#locations {
+	.column(6);
+
+		.inline {
+			#inline_list;
+		}
+	 
+	}
+  .clearfix();
+}
+```
+
+So basically we are adding the column layout and employing `inline_list` namespace.

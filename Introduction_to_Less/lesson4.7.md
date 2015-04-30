@@ -3,4 +3,31 @@
 
 In this step we will refactor and clean up our code.
 
-So, with Less, you can keep the code dry by writing less code, andby not repeating yourself.So, that's not really the case in that bottom section,where we're using multiple times the class inline with the namespace inline list.There is actually three times.So that's really too much, andthis is against the principle of writing Less code.So what we're going to do, we're going to re-factor the code by defining thisone just one time by targeting the div.So we're going to take this one, we're just going to cut it from each section.So first from location, then contact, and the about section as well.Instead, we're going to use this one by targeting the div,because each of them is a div.So we're going to add a div selector.Then we're going to insert this class in line.Meaning that we're going to target div with a class in line.And any CSS property that have been defined,declared inside the space in my list will apply to any div with a class in line.And, for each of these sections about contact and locations, we also have an h3.So, here, as well,at the top, we're going to target all the h3 of the bottom section.First, we're going to add some padding.And, we're going to add a line, a border button.So we're going to add some padding at the bottom.Next, we're going to add a border at the bottom.So, we're going to use the mix-in bordered,that comes from the mix-in library, Less elements.And we just want a border at the bottom, so we're going to use the same trickby specifying a color variable, a color value, just forthe third parameter, and not for the other parameters.That's going to allow us to add a border just for the bottom.And here you go.So now we have polished the design and also refactored and cleaned up the code.
+With Less you can keep the code DRY by writing less code and by not repeating yourself. However in the `bottom` section we're using multiple times the class `inline` with the namespace `inline_list`. That's too much, and this is against the principle of writing less code.
+
+First of all, remove all styling for the `inline` class from the `bottom`. Next define the following rule:
+
+```less
+#bottom {
+ 	div {
+ 	 	.inline {
+ 	  		#inline_list;
+ 	 	}
+ 	}
+}
+```
+
+This way we are reducing the amount of code duplication.
+
+Now the `h3`:
+
+```less
+#bottom {
+ 	h3 {
+		padding-bottom: @padding;
+	 	.bordered(xxx, xxx, @light, xxx);
+	}
+}
+```
+
+So now we have polished the design and also refactored and cleaned up the code.
