@@ -1,3 +1,5 @@
+![](headers/Git_Lesson_2.5.jpg)
+
 # Optional lesson
 
 This lesson is completely optional and skipping over it will have no impact on the rest of the course. You may want to skip this step and come back to it after lesson nine if you're completely new to Git and the terminal.
