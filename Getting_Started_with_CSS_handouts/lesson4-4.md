@@ -1,3 +1,5 @@
+![](headings/BYFW_Lesson_4.4.jpg)
+
 # Introduction
 
 We can use inheritance to write efficient CSS. For example, you can set the `font-size` and `font-family` on the `body` element, and then these properties will be inherited by all descendant elements. On a lower level you can override those properties as needed.
