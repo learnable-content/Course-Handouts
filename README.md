@@ -1,2 +1,18 @@
-# Course-Handouts
-Course handout repository. To browse handouts for a specific course choose the corresponding branch.
+# Index for the A Beginners Guide To Modernizr course
+
+* [ 1-1](A_Beginners_Guide_to_Modernizr_handouts/1-1.md)
+* [ 1-2](A_Beginners_Guide_to_Modernizr_handouts/1-2.md)
+* [ 1-3](A_Beginners_Guide_to_Modernizr_handouts/1-3.md)
+* [ 2-1](A_Beginners_Guide_to_Modernizr_handouts/2-1.md)
+* [ 2-2](A_Beginners_Guide_to_Modernizr_handouts/2-2.md)
+* [ 2-3](A_Beginners_Guide_to_Modernizr_handouts/2-3.md)
+* [ 2-4](A_Beginners_Guide_to_Modernizr_handouts/2-4.md)
+* [ 3-1](A_Beginners_Guide_to_Modernizr_handouts/3-1.md)
+* [ 3-2](A_Beginners_Guide_to_Modernizr_handouts/3-2.md)
+* [ 3-3](A_Beginners_Guide_to_Modernizr_handouts/3-3.md)
+* [ 3-4](A_Beginners_Guide_to_Modernizr_handouts/3-4.md)
+* [ 3-5](A_Beginners_Guide_to_Modernizr_handouts/3-5.md)
+* [ 3-6](A_Beginners_Guide_to_Modernizr_handouts/3-6.md)
+* [ 4-1](A_Beginners_Guide_to_Modernizr_handouts/4-1.md)
+* [ 4-2](A_Beginners_Guide_to_Modernizr_handouts/4-2.md)
+* [ 5-1](A_Beginners_Guide_to_Modernizr_handouts/5-1.md)
