@@ -1,3 +1,5 @@
+![](headings/10.2.png)
+
 # Login Interface
 
 We've got a backend for an accounts system, but we still need to set up an interface that allows users to register and log in. We can create such an interface from scratch, which is simple enough, but there's another approach for getting up and running even faster.

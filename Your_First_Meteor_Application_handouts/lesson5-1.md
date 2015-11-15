@@ -1,3 +1,5 @@
+![](headings/5.1.png)
+
 # Templates
 
 In this chapter, we're going to start building the user interface for the Leaderboard application. This involves creating our first **templates**.

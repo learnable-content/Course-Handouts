@@ -1,3 +1,5 @@
+![](headings/7.1.png)
+
 # Sessions
 
 When a user clicks on one of the player list items, a function is executed, and when this happens, we want to change the background color of that player's list item. This will create the effect of that player being selected. To achieve this, we're going to use a feature of Meteor known as **sessions**. 

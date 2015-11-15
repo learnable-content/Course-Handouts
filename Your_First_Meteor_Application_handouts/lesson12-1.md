@@ -1,3 +1,5 @@
+![](headings/12.1.png)
+
 # Methods
 
 In the previous chapter, we talked about the first of two major security issues that are included with every Meteor project by default. That issue was the ability for users to navigate through all of the data inside the database until we removed the autopublish package. Based on the changes we made, though, users now only have access to the data that belongs to them.

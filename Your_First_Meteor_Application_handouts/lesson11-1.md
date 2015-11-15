@@ -1,3 +1,5 @@
+![](headings/11.1.png)
+
 # Security
 
 Something we haven't talked about yet is **security**. This isn't the most exciting topic in the world, but if we don't think about security, then we can't share our projects with the world. As such, we'll spend the next couple of chapters talking about a couple of fundamental security topics.

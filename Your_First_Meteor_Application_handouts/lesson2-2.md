@@ -1,3 +1,5 @@
+![](headings/2.2.png)
+
 # Introduction to the Command Line
 
 Years ago, computers didn't have graphical interfaces with buttons, windows, or menus. Instead users controlled their computers by typing out commands. These days, **command line interfaces** are still used by software developers for a couple of important reasons.

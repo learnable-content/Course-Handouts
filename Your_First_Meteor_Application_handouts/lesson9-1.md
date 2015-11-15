@@ -1,3 +1,5 @@
+![](headings/9.1.png)
+
 # Introduction
 
 We've finished building the original leaderboard application, but there's still a number of features we can add to the project. In this chapter, we're going to create a form that allows users to add players to the leaderboard and a button that allows users to remove players from the leaderboard.

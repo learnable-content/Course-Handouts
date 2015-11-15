@@ -1,7 +1,49 @@
-# Creating a Remove Player Button
+![](headings/12.6.png)
 
-The next step is to create a method for the remove player button.As a result, users will be able to remove players from the list, butthey still won't be able to use the remove function from inside the console.To begin, delete the remove function from the click remove eventand replace it with a Meteor.call statement.Pass through a value of removePlayer, as the first argument.That is the name of the method that we'll set up in a moment.Then, as the second argument, pass through the selectedPlayer variable.This will allow us to access the ID of the selected player from inside the method.Scroll down to the Meteor.methods block and create the removePlayer method.Just like with helpers and events, we can create multiple methods ina single block of code by separating them with commas.Make it so the method can affect the selectedPlayer argument, andrecreate the remove function from inside the method.Because of this code, the button will work as expected, but
+# Introduction
 
-# Remove Function
+Methods are useful for the sake of security, but we can also use them to reduce the amount of code we have to maintain. To demonstrate this, we are going to combine the increment and decrement events into a single method. This is possible because there's a lot of similar code shared between them. The only difference is that inside the increment event, we're passing a value of 5 into the `$inc` operator, while inside the decrement event, we're passing through a value of -5.
 
-there's still a couple of things for us to consider.First, we have to check to see if the selectedPlayer variable is a string,which can be once again done using the check function.This will prevent the wrong type of data from being passed into the method.And second, we need to prevent logged out users from being able to executethis method which can be done by creating a current user ID variableand by using the same conditional we covered in the previous video.But there is another problem.Because if a user is logged into the application,they're able to call the removePlayer method and pass through the ID ofany player's document, even if that document doesn't belong to them.This means a user could delete players from another user's leaderboard.To solve this problem, change the query inside the remove function, sothat it will only remove a document from the collectionif that document belongs to the currently logged in user.This means there are multiple layers of security that ensure users canonly interact with the database exactly as we want them to.
+To begin, we'll focus on the increment event. Inside this event, remove the `update` function and replace it with a `Meteor.call` statement. Pass through a value of `updateScore` as the first argument. For the second argument, pass through the `selectedPlayer` variable.
+
+Next, create the `updateScore` method inside the `Meteor.methods` block:
+
+```js
+Meteor.methods = {
+	updateScore: function(selectedPlayer) {
+		PlayersList.update({_id: selectedPlayer}, {$inc: {score: 5}});
+	}
+}
+```
+
+To make the method more useful, introduce `scoreValue` variable:
+
+```js
+Meteor.methods = {
+	updateScore: function(selectedPlayer, scoreValue) {
+		PlayersList.update({_id: selectedPlayer}, {$inc: {score: scoreValue}});
+	}
+}
+```
+
+Pass it as an argument via `Meteor.call`.
+
+# Meteor.call Statement
+
+All we have to do is add the `Meteor.call` statement to the decrement event. But instead of passing through a value of 5 as a third argument, we can pass through a value of -5: both buttons will work as expected, but with a lot less code involved.
+
+There are, however, a few problems we still need to solve. First we need to use a `check` function to make sure the `selectedPlayer` variable is a string. Second, we need to use a `check` function to make sure the `scoreValue` variable is a number. Both of these functions will prevent users from passing unwanted data into the method.
+
+Third, we need to create a `currentUserId` variable inside the method, and create a conditional around the `update` function to prevent users from using this method if they're not logged into an account. And fourth, we need to pass the `currentUserId` variable into the `update` function so the logged in users can only update documents that belong to them:
+
+```js
+Meteor.methods = {
+	updateScore: function(selectedPlayer, scoreValue) {
+		check(selectedPlayer, String);
+		check(scoreValue, Number);
+		if(currentUserId) {
+			PlayersList.update({_id: selectedPlayer}, {$inc: {score: scoreValue}});
+		}
+	}
+}
+```

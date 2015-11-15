@@ -1,3 +1,5 @@
+![](headings/8.4.png)
+
 # Introduction
 
 When a user selects one of the players in the list, that player's name should appear beneath the list. To achieve this, create a `selectedPlayer` helper function for the leaderboard template. Within this function, retrieve the ID of the currently selected player using the `Session.get` function and store this inside a `selectedPlayer` variable. Then create a `return` statement that uses a `findOne` function to retrieve the selected players document:

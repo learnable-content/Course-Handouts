@@ -1,3 +1,5 @@
+![](headings/11.3.png)
+
 # Introduction
 
 In this section, we're going to **publish the data** that's inside the `PlayersList` collection. Conceptually, you can think of publishing data as specifying what data should be available to users.

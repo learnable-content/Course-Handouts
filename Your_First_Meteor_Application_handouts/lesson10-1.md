@@ -1,3 +1,5 @@
+![](headings/10.1.png)
+
 # Creating User Accounts
 
 The biggest problem with our application is that it only supports a single list of players. This means there can only be one user of the application at any one time, which isn't very useful for an application on the web. To fix this, we're going to add a user accounts system to our project, which is actually one of the simplest things we can do with the framework. With this system in place, users will be able to register and login. Logged-out users won't see the parts of the interface they're not meant to see. Every user will have their own unique leaderboard.

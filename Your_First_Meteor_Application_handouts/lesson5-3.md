@@ -1,3 +1,5 @@
+![](headings/5.3.png)
+
 # Helper Function
 
 At the moment, our leaderboard template only contains some static text. To fix this we're going to create a **helper function** that is attached to template and allows us to execute code from inside the interface.

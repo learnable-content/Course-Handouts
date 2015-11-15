@@ -1,3 +1,5 @@
+![](headings/3.3.png)
+
 # The Local Server
 
 Web applications are not like static websites: we can't just open the *leaderboard.html* file, and see a working application in our web browser. In fact, if we open that file in the browser, we'll only see some static text. To get the application working, we need to launch what is known as a **local sever** - a web server that runs on our local machine. The local server is included with Meteor and it lets us see the process results of our JavaScript code, and also, interact with the database that comes included with the project.

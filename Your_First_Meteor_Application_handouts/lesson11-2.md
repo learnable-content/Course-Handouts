@@ -1,3 +1,5 @@
+![](headings/11.2.png)
+
 # isServer
 
 In this course, we've mostly been writing code inside the `isClient` conditional. This is because we've mostly been writing code that specifically affects the interface. There are, however, situations where we'll want to run code on the server.

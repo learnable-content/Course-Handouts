@@ -1,3 +1,5 @@
+![](headings/2.3.png)
+
 # Installing Meteor
 
 To install Meteor, visit [http://meteor.com/install](meteor.com/install).

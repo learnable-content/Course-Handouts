@@ -1,3 +1,5 @@
+![](headings/9.2.png)
+
 # Event Object
 
 When an event is triggered from within a Meteor application, we're able to access information about that event as it occurs. That might sound a bit weird, but here's a quick demonstration:

@@ -1,3 +1,5 @@
+![](headings/1.1.png)
+
 # Introduction
 
 This course on building your first Meteor.js application is designed for complete beginners, meaning you won't need any prior experience with Meteor or with building web applications. You will however, need a basic understanding of JavaScript: being familiar with variables, loops, conditionals and functions. You will also need a basic understanding of databases' concepts: tables, rows, columns, and primary keys. Still, we'll be moving nice and slow, so there's a decent chance that any missing pieces will become clearer.

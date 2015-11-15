@@ -1,3 +1,5 @@
+![](headings/9.3.png)
+
 # Removing Players
 
 To allow users to remove players from the leaderboard, first create a "Remove player" button inside the leaderboard template and give this button a `class` attribute of `remove`:

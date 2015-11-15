@@ -1,3 +1,5 @@
+![](headings/4.4.png)
+
 # Inserting Data into a Collection
 
 To insert data into a collection, we have three main options:

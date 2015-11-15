@@ -1,3 +1,5 @@
+![](headings/8.3.png)
+
 # Introduction
 
 By default, the players in our list are ranked by the time they were added to the players list collection, rather than being ranked by their scores. To fix this, we'll modify the player helper function.

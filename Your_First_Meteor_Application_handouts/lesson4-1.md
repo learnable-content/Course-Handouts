@@ -1,3 +1,5 @@
+![](headings/4.1.png)
+
 # Introduction
 
 One of the most difficult parts of teaching people how to build things with Meteor, is deciding when to introduce certain ideas. There are a number of topics we have to cover, but the order in which we talk about these topics can drastically affect whether or not you retain any of the details. One mistake a lot of teachers make, for instance, is starting a book or a course by showing students how to build an interface as soon as possible. This approach is fun because students can see the visual results of their code, which allows students to feel like they're making quick progress. But this approach also introduces a couple of problems:

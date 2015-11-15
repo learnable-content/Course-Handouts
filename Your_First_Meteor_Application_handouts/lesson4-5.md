@@ -1,3 +1,5 @@
+![](headings/4.5.png)
+
 # Retrieving Data
 
 Now that we have some data in our collection, we can retrieve that data. We'll do that through the interface in the next section, but for now, let's just retrieve the data using the console.

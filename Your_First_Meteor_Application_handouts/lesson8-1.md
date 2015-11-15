@@ -1,3 +1,5 @@
+![](headings/8.1.png)
+
 # Introduction
 
 In this chapter, we're going to finish the remaining features of the original Leaderboard application. Then we'll start working on some new features.

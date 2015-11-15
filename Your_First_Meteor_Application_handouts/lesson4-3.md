@@ -1,3 +1,5 @@
+![](headings/4.3.png)
+
 # Introduction
 
 The main feature of the Leaderboard application is the list of players. Without displaying a list of players within the interface, we can't build anything else of value. As such, this is a good place to start, from the middle of the application and working out toward the finer details. But this begs the question, where do we store the data that will be associated with each player? Where do store their names, for instance, or their scores?

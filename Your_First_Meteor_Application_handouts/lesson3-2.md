@@ -1,3 +1,5 @@
+![](headings/3.2.png)
+
 # Introduction
 
 A Meteor **project** is the self-contained set of files that form the foundation of an application. You can use the words project and application interchangeably, but project is better suited for talking about an application as it's being developed. Every project is unique, but will generally contain HTML, CSS, JavaScript files and directories, to keep everything organized. A project can contain other types of files, like images and CoffeeScript files, but we'll keep things as simple as possible in this course, and only work with what we need.

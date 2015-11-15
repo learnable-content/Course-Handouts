@@ -1,3 +1,5 @@
+![](headings/10.3.png)
+
 # One Leaderboard Per User
 
 To make our application useful, we need to make it so registered users each have their own independent list of players. It might not be immediately obvious how to go about doing this, and the most difficult part of programming is figuring out how to approach such problems, but the process itself doesn't involve a lot of steps.

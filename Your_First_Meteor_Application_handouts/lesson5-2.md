@@ -1,3 +1,5 @@
+![](headings/5.2.png)
+
 # Introduction
 
 Before we continue, I want to demonstrate something. You don't have to fully understand what we are about to talk about, but do follow along by writing out all of the code yourself.

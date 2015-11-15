@@ -1,3 +1,5 @@
+![](headings/4.2.png)
+
 # Introduction
 
 If you've ever built something on the web before, you've probably come into contact with some kind of **database**. If you've installed a copy of WordPress for instance, then you would have come into contact with an SQL database .By default, every Meteor project comes with its own database. Whenever you create a project a database is automatically created. And whenever the local server is running, so is that database - there's no set up or configuration required. Everything just works right out of the box. However, this database is not an SQL database.

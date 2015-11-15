@@ -1,3 +1,5 @@
+![](headings/6.1.png)
+
 # Events
 
 In this chapter, we're going to create our first **event**.

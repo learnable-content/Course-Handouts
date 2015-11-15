@@ -1,3 +1,5 @@
+![](headings/7.2.png)
+
 # Player's ID
 
 When a user clicks on one of the players, we want to grab the unique ID of that player and store it inside the selected player session. This will allow us to change the background color of that player's list item.

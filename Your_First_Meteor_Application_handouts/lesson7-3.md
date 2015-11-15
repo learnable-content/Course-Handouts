@@ -1,3 +1,5 @@
+![](headings/7.3.png)
+
 # Introduction
 
 When a user clicks on one of the player's list item, we want to change the `background-color` property for that list item. This will create the effect of that player being selected.

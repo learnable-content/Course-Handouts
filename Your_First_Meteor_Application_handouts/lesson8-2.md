@@ -1,3 +1,5 @@
+![](headings/8.2.png)
+
 # Introduction
 
 Inside the click increment event, remove the `console.log` statement and replace it with a `PlayersList.update` function:

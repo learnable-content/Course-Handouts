@@ -1,3 +1,5 @@
+![](headings/3.4.png)
+
 # Introduction
 
 The default application is nothing special, but, each time we click the "Click Me button", the number on the screen will increase. This is a very basic demonstration of Meteor's real time features. The code behind this application though, isn't precisely important, since we're going to cover a much greater scope in the coming videos.

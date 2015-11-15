@@ -1,3 +1,5 @@
+![](headings/3.1.png)
+
 # Introduction
 
 A big mistake that many beginning developers make is trying to build an application without having a clear idea of what exactly they're trying to build. This is like driving to a new destination without a map. You might make a little progress in the right direction, but you probably won't get to where you need to go. Therefore we will need some kind of plan.

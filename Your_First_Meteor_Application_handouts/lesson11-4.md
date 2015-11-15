@@ -1,3 +1,5 @@
+![](headings/11.4.png)
+
 # Meteor.publish function
 
 In this section, we want to make it so the `Meteor.publish` function only publishes data that belongs to the currently logged in user. This means logged in users will only have access to their data, and logged out users won't have access to any data. As a result, the application will be functional, but secure. To achieve this, we'll need to access the unique ID of the currently logged in user from within the `Meteor.publish` function.

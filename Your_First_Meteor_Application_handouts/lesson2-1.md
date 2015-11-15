@@ -1,3 +1,5 @@
+![](headings/2.1.png)
+
 # Getting Started
 
 Since we're not in the same room, I can't be sure of what you do or don't know about building web applications. Because of this, I'm going to assume a couple of things in this chapter:

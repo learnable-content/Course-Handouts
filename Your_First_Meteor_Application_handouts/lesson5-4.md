@@ -1,3 +1,5 @@
+![](headings/5.4.png)
+
 # Each Blocks
 
 At the moment, our helper function just returns a static value. What we want to happen, though, is for the function to retrieve all of the documents from the `PlayersList` collection. This will allow us to display data from those documents within the interface. To achieve this, replace the static text that's being returned in the helper function with
