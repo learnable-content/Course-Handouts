@@ -1,2 +1,18 @@
-# Course-Handouts
-Course handout repository. To browse handouts for a specific course choose the corresponding branch.
+# Index for the React The ES6 Way course
+
+* [Lesson 1-1](React_the_ES6_Way_handouts/lesson1-1.md)
+* [Lesson 1-2](React_the_ES6_Way_handouts/lesson1-2.md)
+* [Lesson 1-3](React_the_ES6_Way_handouts/lesson1-3.md)
+* [Lesson 1-4](React_the_ES6_Way_handouts/lesson1-4.md)
+* [Lesson 1-5](React_the_ES6_Way_handouts/lesson1-5.md)
+* [Lesson 2-1](React_the_ES6_Way_handouts/lesson2-1.md)
+* [Lesson 2-2](React_the_ES6_Way_handouts/lesson2-2.md)
+* [Lesson 2-3](React_the_ES6_Way_handouts/lesson2-3.md)
+* [Lesson 3-1](React_the_ES6_Way_handouts/lesson3-1.md)
+* [Lesson 3-2](React_the_ES6_Way_handouts/lesson3-2.md)
+* [Lesson 3-3](React_the_ES6_Way_handouts/lesson3-3.md)
+* [Lesson 3-4](React_the_ES6_Way_handouts/lesson3-4.md)
+* [Lesson 4-1](React_the_ES6_Way_handouts/lesson4-1.md)
+* [Lesson 4-2](React_the_ES6_Way_handouts/lesson4-2.md)
+* [Lesson 4-3](React_the_ES6_Way_handouts/lesson4-3.md)
+* [Lesson 5-1](React_the_ES6_Way_handouts/lesson5-1.md)
