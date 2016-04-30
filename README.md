@@ -1,2 +1,19 @@
-# Course-Handouts
-Course handout repository. To browse handouts for a specific course choose the corresponding branch.
+# Index for the Wrapping Your Head Around Python course
+
+* [Lesson 1-1](Wrapping_Your_Head_Around_Python_handouts/lesson1-1.md)
+* [Lesson 1-2](Wrapping_Your_Head_Around_Python_handouts/lesson1-2.md)
+* [Lesson 1-3](Wrapping_Your_Head_Around_Python_handouts/lesson1-3.md)
+* [Lesson 2-1](Wrapping_Your_Head_Around_Python_handouts/lesson2-1.md)
+* [Lesson 2-2](Wrapping_Your_Head_Around_Python_handouts/lesson2-2.md)
+* [Lesson 2-3](Wrapping_Your_Head_Around_Python_handouts/lesson2-3.md)
+* [Lesson 2-4](Wrapping_Your_Head_Around_Python_handouts/lesson2-4.md)
+* [Lesson 2-5](Wrapping_Your_Head_Around_Python_handouts/lesson2-5.md)
+* [Lesson 2-6](Wrapping_Your_Head_Around_Python_handouts/lesson2-6.md)
+* [Lesson 2-7](Wrapping_Your_Head_Around_Python_handouts/lesson2-7.md)
+* [Lesson 2-8](Wrapping_Your_Head_Around_Python_handouts/lesson2-8.md)
+* [Lesson 3-1](Wrapping_Your_Head_Around_Python_handouts/lesson3-1.md)
+* [Lesson 3-2](Wrapping_Your_Head_Around_Python_handouts/lesson3-2.md)
+* [Lesson 3-3](Wrapping_Your_Head_Around_Python_handouts/lesson3-3.md)
+* [Lesson 3-4](Wrapping_Your_Head_Around_Python_handouts/lesson3-4.md)
+* [Lesson 4-1](Wrapping_Your_Head_Around_Python_handouts/lesson4-1.md)
+* [Lesson 4-2](Wrapping_Your_Head_Around_Python_handouts/lesson4-2.md)
