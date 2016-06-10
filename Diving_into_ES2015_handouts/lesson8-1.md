@@ -1,0 +1,3 @@
+Wrapping Up
+
+Thanks for joining me on our journey through the basics of ES2015.In this course, we'll learn about the new module system, new types of variables andhow they are scoped, arrow functions, parameter handling,destructuring, template strings, and classes.While we did cover quite a bit of ground in this class,there are even more features we did not cover, things such as generator functions,maps and sets, promises and proxies.Now that you have the basics covered, just follow some of the links at the bottom ofthe course outline for this lesson to get started on trying out some ofthe other features that ES2015 has to offer.Thanks again for joining me on this journey and have fun using ES2015.

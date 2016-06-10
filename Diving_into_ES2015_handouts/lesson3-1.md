@@ -1,0 +1,12 @@
+Constants and Let
+
+ES2015 introduced a new variable type 'const'.This new variable type should not be confused with constantsin other languages, as it doesn't mean the value is constant at all.It only means that the variable cannot be reassigned,therefore it has a constant reference.Something like this is illegal.However if the constant is assigned an object such as an array,you can mutate the array.You can mutate objects in the same way.This is allowed because you are adding a value to the array or object andnot reassigning.The const assignment only prevents you from reassigning the variableto a new value, but does not prevent you from mutating the value.Another thing to know about the const type is that it cannot be usedbefore assignment, whereas this is perfectlyacceptable; This is not allowed.The above will throw an error because you are attempting to access the variablebefore it has been assigned.In the first example, we are using the 'var' keyword which hoiststhe variable assignment to the top of the execution.Whereas the 'const' keyword does not do this.The 'let' keyword defines a block scope variable just like 'const'.
+Let
+
+However you can reassign to a variable to clear it with 'let'.It has the same properties as described above and allows you to have finer grainedcontrol over the scoping of your variables as opposed to 'var'.
+The Temporal Dead Zone
+
+Now the temporal deadzone is a scary sounding term that refers to a new set ofECMAScript semantics regarding scoping that has been introduced in the ES2015.Essentially it refers to a gray area in which undefined variables cannot yetbe accessed.So let's take the following example.In this case, 'foo' has not yet been defined andtherefore we cannot reassign it.However, if the variable is accessed inside of a function that has yetto be called.You can write code that relies on it before the declaration.This is perfectly valid because the function we created has not yetbeen invoked.As long as we do not invoke the function before declaring the variable,this will not produce any errors.However, if we tried to do this.This would throw an error because we invoked the 'readFoo'function before the through variable was defined.
+Wrapping Up
+
+Constants are great to use in most cases.Use 'let' when you need to reassign a variable forany reason and 'const' when you know it's only a single use variable.Now that's it for exploration of the new 'const' and 'let' types in ES2015.Let's move on and start learning about block scoping.

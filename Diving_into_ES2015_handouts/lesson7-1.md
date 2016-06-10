@@ -1,0 +1,6 @@
+Introducing Classes
+
+A great feature in ES2015 is the brand new 'class' keyword.Classes are not baked into ES2015, but rather are just some syntacticsugar over a pattern that is well established in the JavaScript community.This pattern is called the prototype chain.Every object in JavaScript has an object called the prototype.You can add functionality to the prototype of any object that you would like, andJavaScript developers have been doing this for years.So you can create something that's similar to a class like this.Adding the 'add' function to the prototype will give every instance of'Foo' the 'add' function.
+Classes
+
+This exact same pattern can be expressed like this using ES2015.This is a nicer looking syntax.But doesn't offer anything extra in the way of functionality.It simply gives us a much nicer way to implement classes and class inheritance,like other programming languages that already have this functionality.That's it for the simple introduction to classes.Let's move on to the next lesson and learn about class definition and inheritance.
