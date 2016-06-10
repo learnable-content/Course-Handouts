@@ -1,6 +1,64 @@
-Arrow Functions
+# Lesson 4.1 - Arrow Functions
 
-When working in JavaScript, the lexical scoping of 'this'often causes a lot of problems with newer developers and seasoned veterans alike.Lexical 'this' can be described in this way.Every new function defines its own this value.So when you want to reference a 'this' that isoutside of the scope of that function, you have to use some tricks like assigninganother variable to the value of 'this' that you want to reference in a function.This can be overcome, however, with the use of 'function.prototype.bind'.This will change code that looks like thisto look like this.As you can see, we have avoided assigning an otherwise uselessvariable by simply binding the function to 'this'.This works fine, but I think it a little tedious and it can be easy to forget.Well, have no fear.ES2015 has your back with a new feature called arrow functions.Arrow functions automatically bind to the lexical 'this'.So there's no need to call the bind function.That function from above can now be written like this.Wow!That's awesome.It also allows you to use some short hand syntaxes, that come in really handy andoften times make your code easier to read.For instance you can force an implicit return statementby enclosing the function body in parentheses instead of curly braces.This function that we just wrote is equivalent to the following.You can even leave out the parentheses altogether andwrite the function like this.Or using destructuring.Wow, now that is something.No more endless indentations for one line callback functions.Well, this again was a short of lesson.But I'm fairly certain that you will be using this new ES 2015 feature more thanjust about any other.
-Moving On
+When working in JavaScript, the lexical scoping of `this` often causes a lot of problems with newer developers (and seasoned veterans at times). Lexical this can be described in this way. Every new function defines it's own `this` value, so when you want to reference a `this` that is outside of the scope of
+the function you have to use some tricks like assigning another variable to the value of `this` that you want to reference in a function.
 
-Let's move on, anduse this in some real life examples with our ever evolving receipt calculator.
+This can be overcome, however, with the use of `Function.prototype.bind`. This will change code that looks like this:
+
+```js
+let self = this;
+
+fetch('www.google.com').then(function(response) {
+  self.name = response.body.name;
+});
+```
+
+to this:
+
+```js
+fetch('www.sitepoint.com').then(function(response) {
+  this.name = response.body.name;
+}.bind(this));
+```
+
+As you can see, we have avoided assigning an otherwise useless variable by simply binding the function to `this`. This works fine, but it can get a little tedious, and it can be easy to forget.
+
+Have no fear! ES2015 has your back with a new feature called `arrow functions`. Arrow functions automagically bind to the lexical `this`, so no need for `bind(this)`!
+
+That function from above can now be written as:
+
+```js
+fetch('www.sitepoint.com').then((response) => {
+  this.name = response.body.name;
+})
+```
+
+Wow, that's awesome! It also allows you to use some shorthand syntaxes that come in really handy, and often times make your code easier to read. For instance, you can force an implicit return statement by enclosing the function call in parentheses instead of curly braces:
+
+```js
+fetch('www.sitepoint.com').then((response) => (
+  response.body.name;
+));
+```
+
+The above function is equivalent to the following:
+
+```js
+fetch('www.sitepoint.com').then((response) => {
+  return response.body.name;
+});
+```
+
+You can even leave out the parentheses altogether!
+
+```js
+fetch('www.sitepoint.com').then(response => response.body.name);
+```
+
+or with destructuring
+
+```js
+fetch('www.sitepoint.com').then(({ body: { name } }) => name);
+```
+
+Wow! Now that's something. No more endless indentations for one line callback functions.

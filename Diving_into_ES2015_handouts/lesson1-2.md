@@ -1,12 +1,69 @@
-Text Editor
+# Lesson 1.2 - Tools of the Trade
 
-Welcome to lesson 1.2 of Diving into ES2015.In this video we'll be getting you set up to write an ES2015 code.You're going to need a basic text editor forthis course to follow along with some of the code samples.These days I prefer vim but there are a lot of good choices out there.Atom is a great free choice that is built by GitHub.While Sublime Text is another great choice andvery similar to Atom but not 100% free.And also, if using a full blown IDE is your style,give have WebStorm by JetBrains a try.It has a pretty hefty price tag but has all the bells and whistles.The most important thing here is that you use a text editorthat you are comfortable with.
-Node and npm
+## Text Editor
 
-The next thing we're going to need to have installed is Node and npm.Luckily, npm comes bundled with Node, and when installed from the Node website.If you don't already have it, let's go ahead andinstall the latest version of Node right now.Everything you need is available on the NodeJS website.If you're using Mac orWindows you're in luck, as there are installers for both platforms.Just make sure you click on the stable button before downloadingto ensure that you're getting the latest stable version.If you're using Linux, you can download the Linux binaries.Installing from the binaries, is fairly straightforward.You can just copy and paste all this code in your terminal andyou get installed properly.
-Babel
+You're going to need a basic text editor for this course to follow along with some of the code samples. These days I prefer Vim, but there are a lot of great choices out there:
 
-Now in order to take advantage of all of the new ES-2015 features,we're going to use the Babel CLI to run our node label and to run our scripts.What is Babel?Simply put, Babel is a JavaScript compiler.Babel takes code that is written in future versions of JavaScript orthings like JSX for React.And compiles it to code that is compatible in most browsers.You're maybe wondering what the heck a Node REPL is right now.REPL stands for Read, Evaluate, Print, and Loop.It is simply an interactive environment for writing andtesting code for a computer language.Let's go ahead and install the Babel CLI now that we have Node and npm installed.We used the g flag to tell npm to install this package globally.So that we will have access to the CLI commands everywhere.Normally, we would use the node command to enter into a node REPL.But because we want to take advantage of all of the newest ES2015 features,we're going to be using the 'babel-node' command.This was installed when we installed the label CLI.If you're able to type in 'babel-node' without any errorsyou're ready to move on and start writing some ES 2015 code.In order to use all of the ES2015 features available to us,we're going to need to install the ES2015 presets module.Let's go ahead andcreate a directory where we can store all of our code samples from this course.After creating the directory, we'll install the Babel presets module.Now let's go ahead and run the 'npm init' command to create our package.json file.We could include these presets every time we start the REPL like this.But it's much easier to create a babelrc file to handle this for us.A babelrc file is simply a configuration file that Babel will look forany time it is run.Let's go ahead and do that in the directory that we just created.This is just a simple JSON structure that tells Babel which presetsto use any time it is run.Great, let's go ahead and save that.
-Other Tools
+* [Atom](https://atom.io/) - a great free choice built by GitHub
+* [Sublime Text](https://www.sublimetext.com/) - another great choice, similar to Atom, but not 100% free
+* [Webstorm](https://www.jetbrains.com/webstorm/) - a full blown JavaScript IDE, but it comes at a price.
 
-Now, it's worth mentioning the Babel is not the only toolavailable to handle the transpiling of ES2015 code to ES 5.Tracer is another good choice that is made by Google.We're going to use Babel here because it is widely adopted andfamiliar to a lot of people.Now that we've installed everything we need we can move on to actually writingsome code and learn a few things about ES 2015.
+The most important thing here is that you use a text editor that you are comfortable with.
+
+## Node and npm
+
+The next thing we're going to need to have installed is Node and npm. Luckily, npm comes bundled with Node when installed from the Node website. If you don't already have it, let's go ahead and install the latest version of Node right now.
+
+Everything you need is available on the [NodeJS](https://nodejs.org/en/download/) website. If you're using Mac or Windows, you're in luck, as there are installers for both platforms. Just make sure you click on the "Stable" button before downloading to ensure that you're getting the latest stable version.
+
+If you're using Linux, you can download the Linux binaries. Installing from the binaries is fairly straightforward:
+
+```bash
+$ wget https://nodejs.org/dist/v5.7.1/node-v5.7.1-linux-x64.tar.xz
+$ tar xzf node-v5.7.1-linux-x64.tar.xz
+$ sudo cp -rp node-v5.7.1-linux-x64 /usr/local/
+$ sudo ln -s /usr/local/node-v5.7.1-linux-x64 /usr/local/node
+```
+
+## Babel
+
+In order to take advantage of all of the new ES2015 features we're going to use the Babel CLI to run our Node REPL, and to run our scripts.
+
+What is Babel? Simply put, [Babel](https://babeljs.io/) is a JavaScript compiler. Babel takes code that is written in future versions of JavaScript (or things like JSX for React) and compiles it to code that is compatible in most modern browsers.
+
+You may be wondering what the heck a Node REPL is right now. REPL stands for Read-Eval-Print-Loop. It is simply an interactive environment for writing and testing code for a computer language.
+
+Let's go ahead and install the Babel CLI now that we have Node and npm installed:
+
+```bash
+$ npm install -g babel-cli
+```
+
+We're using the `-g` flag to tell npm to install this package globally so that we will have access to the CLI commands everywhere.
+
+Normally we would use the `node` command to enter into a Node REPL, but because we want to take advantage of all of the newest ES2015 features, we're going to be using the `babel-node` command. This was installed when we installed the Babel CLI. If you're able to type in `babel-node` without any errors you're ready to move on and start writing some ES2015 code!
+
+In order to use all of the ES2015 features available to us, we're going to need to install the ES2015 presets module. Let's go ahead and create a directory where we can store all of our code samples from this course. After creating the directory, we'll install the babel presets module:
+
+```bash
+$ mkdir es2015
+$ cd es2015
+$ npm init -y
+$ npm install babel-preset-es2015
+```
+
+We could include these presets every time we start the REPL like this:
+
+```bash
+$ babel-node --presets es2015
+```
+
+But it's much easier to create a `.babelrc` file to handle this for us! A `.babelrc` is simply a configuration file that Babel will look for any time it is run. Let's go ahead and do that in the root of your code directory that we created.
+
+```json
+{
+  presets: [
+    'es2015'
+  ]
+}
+```
