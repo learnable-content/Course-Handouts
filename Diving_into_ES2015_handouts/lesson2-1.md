@@ -1,3 +1,5 @@
+![](headings/2.1.png)
+
 # Lesson 2.1 - Introducing Modules
 
 The first thing we're going to talk about in this course is the introduction of a standard way to encapsulate code using modules.

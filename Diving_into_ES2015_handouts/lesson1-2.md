@@ -1,3 +1,5 @@
+![](headings/1.2.png)
+
 # Lesson 1.2 - Tools of the Trade
 
 ## Text Editor

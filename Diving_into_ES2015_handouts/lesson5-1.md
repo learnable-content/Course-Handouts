@@ -1,3 +1,5 @@
+![](headings/5.1.png)
+
 # Lesson 5.1 - Destructuring Assignment
 
 ES2015 comes with a brand new way to assign variables when dealing with arrays and objects. This new feature is called `destructuring assignment` and it allows you to easily assign variables from array elements or key/value pairs for an object. Let's dive right in shall we?

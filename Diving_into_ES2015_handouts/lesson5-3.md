@@ -1,3 +1,5 @@
+![](headings/5.3.png)
+
 # Lesson 5.3 - Parameter Handling in the Real World
 
 So far in this lesson we have learned some great new ES2015 features that have everything to do with parameter handling. Let's write a little bit of code so that we can see how this might help us in the real world.

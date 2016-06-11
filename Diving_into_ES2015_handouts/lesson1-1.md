@@ -1,3 +1,5 @@
+![](headings/1.1.png)
+
 # Introduction
 
 So let's go ahead and get set up so we can start writing some ES2015 code. The specification was ratified in **June of 2015** and is currently being implemented in browsers.

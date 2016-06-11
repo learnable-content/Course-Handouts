@@ -1,3 +1,5 @@
+![](headings/7.4.png)
+
 # Lesson 7.4 - Static Members
 
 The last thing we're going to talk about with regards to classes is static members. Static members allow you to create methods on a class that are not bound to any instance of the class. Let's look at a `Rectangle` class for instance:

@@ -1,3 +1,5 @@
+![](headings/4.2.png)
+
 # Lesson 4.2 - Arrow Functions Everywhere
 
 So far in this lesson we have learned a bit about how arrow functions work. Let's write a little bit of code so that we can see how this might help us in the real world.

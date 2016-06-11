@@ -1,3 +1,5 @@
+![](headings/7.3.png)
+
 # Lesson 7.3 - Getters, Setters, and Base Class Access
 
 A couple of interesting things we can do with classes is defining getters and setters. It looks like this:

@@ -1,3 +1,5 @@
+![](headings/3.1.png)
+
 # Lesson 3.1 - Constants and Let
 
 ES2015 introduced a new variable type: `const`. This new variable type should not be confused with constants in other languages as it doesn't mean the value is constant at all! It only means that the variable cannot be reassigned, therefore it has a constant reference. This is illegal:

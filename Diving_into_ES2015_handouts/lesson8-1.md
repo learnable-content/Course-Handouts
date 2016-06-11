@@ -1,3 +1,5 @@
+![](headings/8.1.png)
+
 # Lesson 8.1 - Wrapping Up
 
 Thanks for joining me on our journey through the basics of ES2015! We learned about the new module system, new types of variables and how they are scoped, arrow functions, parameter handling and destructuring, template string, and classes, oh my!

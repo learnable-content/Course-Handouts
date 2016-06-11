@@ -1,3 +1,5 @@
+![](headings/3.2.png)
+
 # Lesson 3.2 - Block Scoped Variables
 
 Let's explore block scoped variables shall we? Block scoped variables are simply variables that are local to the block in which they were defined. Let's explore this a bit with some code samples.
