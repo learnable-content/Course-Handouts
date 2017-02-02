@@ -1,2 +1,21 @@
-# Course-Handouts
-Course handout repository. To browse handouts for a specific course choose the corresponding branch.
+# Index for the CSS Animations course
+
+* [Lesson 1-1](CSS_Animations_handouts/lesson1-1.md)
+* [Lesson 1-2](CSS_Animations_handouts/lesson1-2.md)
+* [Lesson 1-3](CSS_Animations_handouts/lesson1-3.md)
+* [Lesson 1-4](CSS_Animations_handouts/lesson1-4.md)
+* [Lesson 1-5](CSS_Animations_handouts/lesson1-5.md)
+* [Lesson 2-1](CSS_Animations_handouts/lesson2-1.md)
+* [Lesson 2-2](CSS_Animations_handouts/lesson2-2.md)
+* [Lesson 3-1](CSS_Animations_handouts/lesson3-1.md)
+* [Lesson 3-2](CSS_Animations_handouts/lesson3-2.md)
+* [Lesson 4-1](CSS_Animations_handouts/lesson4-1.md)
+* [Lesson 4-2](CSS_Animations_handouts/lesson4-2.md)
+* [Lesson 5-1](CSS_Animations_handouts/lesson5-1.md)
+* [Lesson 5-2](CSS_Animations_handouts/lesson5-2.md)
+* [Lesson 5-3](CSS_Animations_handouts/lesson5-3.md)
+* [Lesson 6-1](CSS_Animations_handouts/lesson6-1.md)
+* [Lesson 6-2](CSS_Animations_handouts/lesson6-2.md)
+* [Lesson 7-1](CSS_Animations_handouts/lesson7-1.md)
+* [Lesson 7-2](CSS_Animations_handouts/lesson7-2.md)
+* [Lesson 8-1](CSS_Animations_handouts/lesson8-1.md)
