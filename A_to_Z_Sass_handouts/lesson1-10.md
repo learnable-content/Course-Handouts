@@ -27,16 +27,16 @@ different types of values, each with a unique key or label.
 Here is a comparrison of the two, with Sass on the left and JSON on the
 right:
 
-{% highlight scss %}
+```scss
 $colors: (
 	pink: '#cc3f85',
 	blue: '#94d6ed',
 	purple: '#a485fb',
 	yellow: '#e3db6f'
 );
-{% endhighlight %}
+```
 
-{% highlight JSON %}
+```
 {
 	"colors": {
 		"pink": "#cc3f85",
@@ -45,7 +45,7 @@ $colors: (
 		"yellow": "#e3db6f"
 	}
 }
-{% endhighlight %}
+```
 
 As the syntax of both these data types is quite similar, it's possible
 to convert a Sass map into JSON or JSON into a Sass map. 
@@ -79,17 +79,17 @@ visual purpose.
 After processing our Sass into JSON (more on that later) our compiled
 CSS might look like this:
 
-{% highlight css %}
+```css
 body:before {
 	display:none!important;
 	content: '{ "colors": { "pink": "#cc3f85", "blue": "#94d6ed", "purple": "#a485fb", "yellow": "#e3db6f" } }';
 }
-{% endhighlight %}
+```
 
 This value can then be read by JavaScript using the `getComputedStyle`
 method, santized and parsed into JSON.
 
-{% highlight javascript %}
+```javascript
 var santizeContent = function( string ) {
 	return string.replace(/^['"]+|\s+|\\|(;\s?})+|['"]$/g, '');
 }
@@ -103,16 +103,16 @@ var getSassVars = function() {
 	return JSON.parse( santizeContent( style ) );
 }
 var sassVars = getSassVars();
-{% endhighlight %}
+```
 
 Having gone through this somewhat long-winded process, your Sass
 variables are now available in JavaScript and can be accessed through
 the `sassVars` JS variable: 
 
-{% highlight javascript %}
+```javascript
 var blue = sassVars.colours.blue;
 console.log( blue ); // #94d6ed;
-{% endhighlight %}
+```
 
 
 
@@ -125,17 +125,17 @@ Using a third-party tool like [Sass JSON
 vars](https://viget.com/extend/sharing-data-between-sass-and-javascript-with-json),
 the JSON can be imported into your Sass files direct.
 
-{% highlight bash %}
+```scss
 gem install sass-json-vars
-{% endhighlight %}
+```
 
-{% highlight scss %}
+```scss
 @import 'shared-variables.json';
-{% endhighlight %}
+```
 
-{% highlight bash %}
+```scss
 sass scss/main.scss:css/main.css -r sass-json-vars --watch
-{% endhighlight %}
+```
 
 This technique leverages the computing power of a more powerful language
 to do the conversion rather than leaning on Sass to parse its native map

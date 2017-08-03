@@ -52,9 +52,9 @@ be loaded on a case by case basis or you can include the whole library
 (as has been done on this project) by importing it in your compiled
 stylesheets:
 
-{% highlight scss %}
+```scss
 @import 'compass';
-{% endhighlight %}
+```
 
 Having analysed the whole repository for this client project, the only Compass
 mixins being used are for:

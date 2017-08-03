@@ -13,7 +13,7 @@ specifying a series of keyframes with a percentage syntax.
 For example, we could animate the `left` position of an element from `0` to
 `100%` and back again using the following snippet:
 
-{% highlight css %}
+```css
 @keyframes move {
 	0%   { left:0; }
 	100% { left:100%; }
@@ -29,7 +29,7 @@ For example, we could animate the `left` position of an element from `0` to
 
 	animation: move 5s alternate 4 ease;
 }
-{% endhighlight %}
+```
 
 First we have a block of keyframes which describe the key moments in
 time throughout the duration of the animation.
@@ -55,7 +55,7 @@ mixin and then refactor it to make it as flexible as possible.
 
 Let's continue with the simple example we've just been looking at.
 
-{% highlight css %}
+```css
 @keyframes move {
 	0%   { left:0; }
 	100% { left:100%; }
@@ -63,14 +63,14 @@ Let's continue with the simple example we've just been looking at.
 .logo {
 	animation: move 5s infinite alternate ease;
 }
-{% endhighlight %}
+```
 
 As we want to create the keyframes and use them at the same time, we
 could create a mixin that takes arguments for each of the various
 animation properties and then uses the `@content` directive so we can
 create the keyframes in the body of the mixin.
 
-{% highlight scss %}
+```scss
 @mixin animation( $name, $duration, $delay, $iteration, $direction, $fill-mode, $timing ) {
 	@keyframes #{$name} {
 		@content;
@@ -83,21 +83,21 @@ create the keyframes in the body of the mixin.
 	animation-fill-mode: $fill-mode;
 	animation-timing-function: $timing;
 }
-{% endhighlight %}
+```
 
 This provides an interface to create the block of named keyframes and
 then pass in all the animation properties at once.
 
 We'd use this mixin as follows:
 
-{% highlight scss %}
+```scss
 .logo {
 	@include animation( move, 5s, 0, infinite, alternate, forwards, ease) {
 		0% { left:0; }
 		100% { left:100%; }
 	}
 }
-{% endhighlight %}
+```
 
 This works but there are some limitations. Firstly, we have to specify
 each of the parameters in the mixin when calling it with `@include`. Or
@@ -112,14 +112,14 @@ We can do this by specifying default values of `null` in the mixin
 definition. We'd now only have to specify a name and a duration to use
 the mixin which is a slight improvement.
 
-{% highlight %}
+```
 @mixin animation( $name, $duration, $delay:null, $iteration:null, $direction:null, $fill-mode:null, $timing:null ) {
 }
 @include animation( move, 5s ) {
 	0% { left:0; }
 	100% { left:100%; }
 }
-{% endhighlight %}
+```
 
 But this still doesn't solve the problem of having to remember the order
 of the parameters. Instead, we can construct our mixin to accept
@@ -128,7 +128,7 @@ property to apply them to our element.
 
 We do this with a `...` syntax after the last parameter name. 
 
-{% highlight %}
+```
 @mixin animation( $name, $properties... ) {
 	@keyframes #{$name} {
 		@content;
@@ -142,7 +142,7 @@ We do this with a `...` syntax after the last parameter name.
 		to { left:100%; }
 	}
 }
-{% endhighlight %}
+```
 
 Now our mixin accepts a required parameter for the `animation-name` and
 then a variable number of `$properties` which can be used with the
@@ -173,7 +173,7 @@ This variable can then be used with interpolation to create a single
 animation shorthand comprised of the `$name` and other `$properties` in
 a single line.
 
-{% highlight scss %}
+```scss
 @mixin animation( $args... ) {
 	$name: unique-id();
 	animation: #{$name $args};
@@ -189,7 +189,7 @@ a single line.
 		to { left:100%; }
 	}
 }
-{% endhighlight %}
+```
 
 The only downside to this method is when needing to create a set of
 keyframes that will be reused multiple times by multiple selectors
@@ -201,7 +201,7 @@ I'd probably argue that we've refactored our mixin one step too far and
 actually made it overly complex, a little too abstract and not suitable
 for creating reusable animations.
 
-{% highlight %}
+```
 @mixin animation( $name, $properties... ) {
 	@keyframes #{$name} {
 		@content;
@@ -215,7 +215,7 @@ for creating reusable animations.
 		to { left:100%; }
 	}
 }
-{% endhighlight %}
+```
 
 While we've learned a couple of advanced Sass tricks (which is always
 interesting of course), I'd revert our final code back to the previous

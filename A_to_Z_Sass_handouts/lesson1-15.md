@@ -18,19 +18,19 @@ Here's a quick recap of how it works:
 I've got an example here with a base class of `.message` which sets up
 some visual characteristics for a notification message.
 
-{% highlight scss %}
+```scss
 .message {
 	padding:1em;
 	background: #eee;
 	border:1px solid #ccc;
 }
-{% endhighlight %}
+```
 
 If our project needs additional types of message - perhaps for
 a success message or an error message - we could create additional
 classes and then have them inherit the base notification styles via `@extend`.
 
-{% highlight %}
+```
 .success-message {
 	@extend .message;
 
@@ -42,13 +42,13 @@ classes and then have them inherit the base notification styles via `@extend`.
 	color:#fff;
 	background: red;
 }
-{% endhighlight %}
+```
 
 This produces a comma separated list of selectors that share the same
 properties and additional selectors that contain any unique properties
 or values.
 
-{% highlight %}
+```
 .message, .error-message, .success-message {
 	padding:1em;
 	background: #eee;
@@ -61,7 +61,7 @@ or values.
 	color:#fff;
 	background:red;
 }
-{% endhighlight %}
+```
 
 But imagine the situation where this `.message` module is being used
 from a 3rd-party library or framework. Perhaps this is unintentionally
@@ -77,13 +77,13 @@ To silence this error and have our Sass code fail gracefully, we can add
 the `!optional` flag to the end of the `@extend` statement. This
 prevents the compile from failing and we can continue on our merry way.
 
-{% highlight scss %}
+```scss
 .success-message {
 	@extend .message !optional;
 
 	background:lightgreen;
 }
-{% endhighlight %}
+```
 
 However, I'm not too sure this is a good idea. 
 
@@ -113,14 +113,14 @@ a number of the key settings for the site are controlled via global
 variables for things like the primary and secondary colours, base font
 size and heading sizes.
 
-{% highlight scss %}
+```scss
 // Site settings
 
 $primary-color: red;
 $secondary-color: blue;
 $base-font-size: 16px;
 $h1-font-size: 50px;
-{% endhighlight %}
+```
 
 We would normally create separate partials for the variables and the
 styles but I've kept them in the same file here so you can see
@@ -130,7 +130,7 @@ Here are a series of variables with their initial values. If we want to
 override any of these values, we can just redeclare the variable below
 and change the value.
 
-{% highlight scss %}
+```scss
 // Site settings
 
 $primary-color: red;
@@ -143,7 +143,7 @@ $h1-font-size: 50px;
 $primary-color: pink;
 $secondary-color: lightblue;
 $h1-font-size: 80px;
-{% endhighlight %}
+```
 
 The variables further down the file (or lower in the source order)
 override the ones above.
@@ -152,7 +152,7 @@ However, if we make the inital settings all `!default` variables, the
 source order doesn't have any effect at all. The variables without the
 default flag will always win. 
 
-{% highlight scss %}
+```scss
 // Overrides
 
 $primary-color: pink;
@@ -165,7 +165,7 @@ $primary-color: red !default;
 $secondary-color: blue !default;
 $base-font-size: 16px !default;
 $h1-font-size: 50px !default;
-{% endhighlight %}
+```
 
 Any default variables that are not redeclared just use their default
 value.

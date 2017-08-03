@@ -13,12 +13,12 @@ value (or multiple values), performs some kind of calculation and then
 sends back a new value. They are ideal for performing mathematical
 operations or converting one type of value into another type of value.
 
-{% highlight bash %}
+```scss
 @function function-name( $parameters ) {
 	// do stuff with input $parameters
 	@return $output-value;
 }
-{% endhighlight %}
+```
 
 Using functions hands over the responsibility of doing complex
 calculations to a machine rather than leaving that work and mental
@@ -55,47 +55,47 @@ The base font size is `16px` which is the equivalent to `1rem`. If we
 wanted to express `32px` in rems we'd divide 32 by 16 and get the
 result: `2rem`
 
-{% highlight scss %}
+```scss
 32px / 16px = 2
-{% endhighlight %}
+```
 
 If we wanted to express `8px` in rems we'd divide 8 by 16 which gives
 the result 0.5.
 
-{% highlight scss %}
+```scss
 8px / 16px = 0.5
-{% endhighlight %}
+```
 
 So the calculation to convert a pixel value to a rem value is to divide
 the pixel value by the base font-size and then multiply this by 1rem. We
 can create a Sass function to automate this process for us as follows:
 
-{% highlight scss %}
+```scss
 $base-font-size: 16px;
 
 @function px-to-rem( $value ) {
 	@return ( $value / $base-font-size ) * 1rem;
 }
-{% endhighlight %}
+```
 
 Our function accepts an input which we've called `$value` and sends back
 a `return` value in rems.
 
 To use this function, we call it as follows:
 
-{% highlight scss %}
+```scss
 .element {
 	font-size: px-to-rem( 20px );
 }
-{% endhighlight %}
+```
 
 This will convert `20px` to `1.25rem` and compile to 
 
-{% highlight scss %}
+```scss
 .element {
 	font-size: 1.25rem;
 }
-{% endhighlight %}
+```
 
 Instead of reaching for a calculator or doing a quick sum in our head,
 we can leverage the power of Sass to do that for us so we can focus on
@@ -131,41 +131,41 @@ To convert 80em into the number 80, we need to divide 80em by 1em.
 
 The following function does exactly this:
 
-{% highlight scss %}
+```scss
 @function strip-units( $length ) {
 	@return $length / ( ( $length * 0 ) + 1 );
 }
-{% endhighlight %}
+```
 
 Now we can update our `px-to-rem` function to strip any units from the
 input values by calling the `strip-units` function.
 
-{% highlight scss %}
+```scss
 @function px-to-rem( $value ) {
 	$value: strip-units( $value );
 	$base-font-size: strip-units( $base-font-size );
 
 	@return ( $value / $base-font-size ) * 1rem;
 }
-{% endhighlight %}
+```
 
 Now we can call the function with a `px` length or a number as follows:
 
-{% highlight scss %}
+```scss
 .element {
 	font-size: px-to-rem( 20px );
 	padding: px-to-rem( 15 );
 }
-{% endhighlight %}
+```
 
 Which will output
 
-{% highlight scss %}
+```scss
 .element {
 	font-size: 1.25rem;
 	padding: 0.9375rem;
 }
-{% endhighlight %}
+```
 
 So not only is our function flexible but it's really useful; instead of
 seeing values like `0.9375rem` in the stylesheet and trying to get

@@ -21,9 +21,9 @@ string, a selector or property name.
 Sass uses a special syntax for inserting values into other values that
 takes the form 
 
-{% highlight scss %}
+```scss
 	"This string will have a #{ $variable } inserted into it."
-{% endhighlight %}
+```
 
 This syntax is also found in the Ruby programming language where Sass
 has its roots.
@@ -42,24 +42,24 @@ I've got a selector for the logo and I want to apply the image as
 a background image. If I were to write it out manually, the image URL
 would look as follows. 
 
-{% highlight css %}
+```css
 .logo {
 	background: url( 'images/logo.png' );
 }
-{% endhighlight %}
+```
 
 But instead of writing it out manually, I'm going to use the variable.
 
 If I add the variable name within the url string, Sass doesn't throw an
 error but the image doesn't show up.
 
-{% highlight scss %}
+```scss
 $image: 'logo.png';
 
 .logo {
   background: url( 'images/$image' );
 }
-{% endhighlight %}
+```
 
 Adding `$image` within the quotes for the path creates the litteral
 string `images/$image` as a URL. If we want `$image` to be used as
@@ -68,13 +68,13 @@ a Sass variable we have two options.
 Firstly, we could use string concattenation. This is the process of
 joining two strings together using a `+` operator.
 
-{% highlight scss %}
+```scss
 $logo: 'logo.png';
 
 .logo {
   background: url( 'images/' + $logo );
 }
-{% endhighlight %}
+```
 
 We add the string `"logo.png"` from the variable onto the end of the
 `"images/"` string in the URL.
@@ -83,13 +83,13 @@ Alternatively, we could use interpolation and insert the value of the
 variable within the url string. To do that, we can re-write the code as
 follows:
 
-{% highlight scss %}
+```scss
 $logo: 'logo.png';
 
 .logo {
 	background: url( 'images/#{ $logo }' );
 }
-{% endhighlight %}
+```
 
 Within the interpolation braces, the Sass expresion is interpreted first
 and then inserted within the string. 
@@ -115,11 +115,11 @@ and one called `$property` and one called `$value`. These variables
 could have been named anything, but I've named them according to where
 they'll be used for this example.
 
-{% highlight scss %}
+```scss
 $selector: 'highlight';
 $property: 'bottom';
 $value:    red;
-{% endhighlight %}
+```
 
 We can use the `$value` variable in the typical way to set the `color`
 property. When Sass compiles, this variable name is substituted for its
@@ -129,31 +129,31 @@ If we wanted to use the `$selector` variable in the selector, we need to
 use interpolation as string concattenation with `+` doesn't work as `+`
 is actually used as an adjacent [sibling selector](http://www.atozcss.com/g).
 
-{% highlight scss %}
+```scss
 // this won't work
 
 p . + $selector {
 	color: red;
 }
-{% endhighlight %}
+```
 
 Instead, we use interpolation to create the selector `p .highlight` in
 the compiled CSS.
 
-{% highlight scss %}
+```scss
 p .#{ $selector } {
 	color: red;
 }
-{% endhighlight %}
+```
 
 A similar thing can be done to use a variable within a property name.
 
-{% highlight scss %}
+```scss
 p .#{ $selector } {
 	color: red;
 	border-#{ $property }: 2px solid;
 }
-{% endhighlight %}
+```
 
 Interpolation is a very useful feature - even if using variables in
 selectors or properties isn't as common as using variables for values,
@@ -175,7 +175,7 @@ of pixels.
 This can be included in a media query as a value as part of
 a `min-width` or `max-width` media query:
 
-{% highlight scss %}
+```scss
 $breakpoint: 500px;
 
 @media screen and ( min-width: $breakpoint ) {
@@ -183,22 +183,22 @@ $breakpoint: 500px;
 		font-size: 1.25rem;
 	}
 }
-{% endhighlight %}
+```
 
 Imagine we use these `min-width` media queries a lot; we might get tired
 of typing out `screen and ( min-width: $breakpoint )` all the time.
 Instead, we could create another variable for the whole query and even
 use interpolation to insert the value of our breakpoint:
 
-{% highlight scss %}
+```scss
 $breakpoint: 500px;
 $query: 'screen and ( min-width: #{ breakpoint } )';
-{% endhighlight %}
+```
 
 If we were now to use this variable for the media query, Sass would
 throw an error. 
 
-{% highlight scss %}
+```scss
 $breakpoint: 500px;
 $query: 'screen and ( min-width: #{$breakpoint} )'; 
 
@@ -207,14 +207,14 @@ $query: 'screen and ( min-width: #{$breakpoint} )';
 		font-size: 1.25rem;
 	}
 }
-{% endhighlight %}
+```
 
 Instead, we need to use interpolation and everything works as planned.
 
-{% highlight scss %}
+```scss
 @media #{$query} {
 	body {
 		font-size: 1.25rem;
 	}
 }
-{% endhighlight %}
+```

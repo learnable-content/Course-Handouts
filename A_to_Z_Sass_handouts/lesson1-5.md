@@ -7,7 +7,7 @@ styling. To use the mixin we declare `@include` followed by the mixin
 name within another CSS selector. And the styles from within the mixin
 are output at that point in the code when the CSS compiles.
 
-{% highlight scss %}
+```scss
 @mixin uppercase-letter-spacing {
 	text-transform:uppercase;
 	letter-spacing: 2px;
@@ -15,12 +15,12 @@ are output at that point in the code when the CSS compiles.
 .page-title {
 	@include uppercase-letter-spacing;
 }
-{% endhighlight %}
+```
 
 In the HTML I've got three different elements which I want to apply the
 mixin to.
 
-{% highlight html %}
+```html
 <h1 class="page-title">
 	lorem ipsum
 </h1>
@@ -32,7 +32,7 @@ mixin to.
 <p>
 	lorem <b class="highlight">ipsum</b> dolor sit amet.
 </p>
-{% endhighlight %}
+```
 
 This example is quite compact but imagine these selectors being used in
 multiple Sass files or separated by a number of lines of code.
@@ -52,17 +52,17 @@ selectors that share the same properties.
 So instead of creating a mixin for the uppercase and letter spaced text,
 we could create a class instead.
 
-{% highlight css %}
+```css
 .uppercase-letter-spacing {
 	text-transform:uppercase;
 	letter-spacing: 2px;
 }
-{% endhighlight %}
+```
 
 And then have all our other selectors inherit these properties via
 `@extend`.
 
-{% highlight scss %}
+```scss
 .page-title {
 	@extend .uppercase-letter-spacing;
 }
@@ -73,7 +73,7 @@ And then have all our other selectors inherit these properties via
 	@extend .uppercase-letter-spacing;
 	font-weight:bold;
 }
-{% endhighlight %}
+```
 
 Again, do imagine that these selectors are separated by many lines of
 code or in different files - I'm keeping everything compact here so you
@@ -85,7 +85,7 @@ separated.
 Therefore the major difference between `@extend` and `@mixin`
 is what is output as CSS by the compiler.
 
-{% highlight css %}
+```css
 .uppercase-letter-spacing, .page-title, .intro span, .highlight {
 	text-transform: uppercase;
 	letter-spacing: 2px;
@@ -94,7 +94,7 @@ is what is output as CSS by the compiler.
 .highlight {
 	font-weight: bold;
 }
-{% endhighlight %}
+```
 
 
 
@@ -116,7 +116,7 @@ differentiate them from other selectors like class (`.`) or id (`#`). To
 rewrite our previous example with a placeholder selector, we'd use the
 following snippet:
 
-{% highlight css %}
+```css
 %uppercase-letter-spacing {
 	text-transform:uppercase;
 	letter-spacing: 2px;
@@ -124,7 +124,7 @@ following snippet:
 .page-title {
 	@extend %uppercase-letter-spacing;
 }
-{% endhighlight %}
+```
 
 When the CSS compiles, there is no selector generated with the name
 "uppercase-letter-spacing" but this silent selector can be used within
@@ -133,7 +133,7 @@ the Sass.
 Adding the extends back in, we now get the following result in the
 compiled CSS:
 
-{% highlight css %}
+```css
 .page-title, .intro span, .highlight {
 	text-transform: uppercase;
 	letter-spacing: 2px;
@@ -142,7 +142,7 @@ compiled CSS:
 .highlight {
 	font-weight: bold;
 }
-{% endhighlight %}
+```
 
 So, when extending normal selectors like classes, the selector being
 extended will be compiled into CSS but when using placeholders, only the
@@ -152,7 +152,7 @@ A great use-case for extend is when applying clearfix to prevent
 container collapse when building floated layouts. So instead of creating
 a clearfix class, create a clearfix placeholder selector:
 
-{% highlight scss %}
+```scss
 %clearfix:before,
 %clearfix:after {
 	content: " ";
@@ -161,12 +161,12 @@ a clearfix class, create a clearfix placeholder selector:
 %clearfix:after {
 	clear:both;
 }
-{% endhighlight %}
+```
 
 And then instead of adding classes to your HTML, just extend the
 placeholder where necessary:
 
-{% highlight scss %}
+```scss
 .image-grid {
 	@extend %clearfix;
 }
@@ -176,7 +176,7 @@ placeholder where necessary:
 .share-this {
 	@extend %clearfix;
 }
-{% endhighlight %}
+```
 
 I use this technique myself to avoid cluttering up the HTML with utility
 classes and I've found it to be a great use-case for extend.
@@ -205,20 +205,20 @@ number of classes applied to an element in the HTML because you can have
 a single class inherit the behaviour of multiple classes. This can
 help bring more meaning to your class names too. So, instead of:
 
-{% highlight html %}
+```html
 <div class="col medium-4 large-6 last"></div>
-{% endhighlight %}
+```
 
 We could have a more meaningful class name that exhibits the same
 behaviour:
 
-{% highlight html %}
+```html
 <div class="latest-posts"></div>
-{% endhighlight %}
+```
 
 Which is an extension of:
 
-{% highlight scss %}
+```scss
 .latest-posts {
 	@extend .col;
 	@extend .medium-4;
@@ -226,7 +226,7 @@ Which is an extension of:
 	@extend .last;
 	/* other styles below */
 }
-{% endhighlight %}
+```
 
 But. All of this does come with some downsides.
 

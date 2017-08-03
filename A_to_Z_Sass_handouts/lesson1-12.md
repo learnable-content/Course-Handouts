@@ -44,7 +44,7 @@ will be output. These will use the value of the counter variable in some
 way such as creating numbered class names or as part of some
 mathematical calculation.
 
-{% highlight scss %}
+```scss
 @for $i from 1 through 10 {
 
 	.box-#{$i} {
@@ -52,7 +52,7 @@ mathematical calculation.
 	}
 
 }
-{% endhighlight %}
+```
 
 This example will create 10 class names with a numeric sequence from
 `.box-1` up to and including `.box-10` where each box has an
@@ -69,7 +69,7 @@ how the counter changes manually.
 
 `@while` loops take the following form and are comprised of 4 key parts:
 
-{% highlight scss %}
+```scss
 $i: 10;
 @while $i > 0 {
 
@@ -79,7 +79,7 @@ $i: 10;
 	$i: $i - 2;
 
 }
-{% endhighlight %}
+```
 
 * A starting value of a variable. Here we create a counter variable `$i`
 with the initial value of `10`.
@@ -106,7 +106,7 @@ the next episode).
 
 A Sass `@each` loop takes the following form:
 
-{% highlight scss %}
+```scss
 $team: 'rob', 'remy', 'jeff', 'jim';
 @each $name in $team {
 
@@ -115,7 +115,7 @@ $team: 'rob', 'remy', 'jeff', 'jim';
 	}
 
 }
-{% endhighlight %}
+```
 
 We start with a collection - in this case a list of names.
 
@@ -143,11 +143,11 @@ These will only output certain lines of code if a pre-defined condition
 is true. The condition is a Sass script expression which should evaluate
 to `true` or `false`.
 
-{% highlight scss %}
+```scss
 @if ( $is-visible == true ) {
 	display:block;
 }
-{% endhighlight %}
+```
 
 In this example the `display:block` styles will only be output if the
 variable `$is-visible` is set to true.
@@ -157,13 +157,13 @@ but other styles in all other cases. Taking the visibility example
 further, we could add a second part to the conditional to say *if* it's
 visible, set `display:block`, *else* set `display:none`.
 
-{% highlight scss %}
+```scss
 @if ( $is-visible == true ) {
 	display:block;
 } @else {
 	display:none;
 }
-{% endhighlight %}
+```
 
 In this case, only one line of CSS is ever output. Think of it a bit
 like a fork in the road - each time you approach the fork you have to
@@ -175,7 +175,7 @@ Finally, it's possible to set up multiple conditions with `@if` and
 example which sets a series of element widths based on a range of
 variable values:
 
-{% highlight scss %}
+```scss
 $width: 'large';
 
 @if ( $width == 'small' ) {
@@ -187,7 +187,7 @@ $width: 'large';
 } @else {
 	width: auto;
 }
-{% endhighlight %}
+```
 
 As with the other conditional statements we've already seen, only one of
 these widths will ever be output.
@@ -217,7 +217,7 @@ and vertical centring of the text inside each box. If you want to dive
 into flexbox in more detail, check out my course on Flexbox Fundamentals
 at [atozcss.com/courses](http://www.atozcss.com/courses).
 
-{% highlight scss %}
+```scss
 .swatches {
 	list-style:none;
 	margin:1rem 0;
@@ -237,7 +237,7 @@ at [atozcss.com/courses](http://www.atozcss.com/courses).
 	&:before { content: "$color-name" }
 	&:after  { content: "#hex" }
 }
-{% endhighlight %}
+```
 
 Each box is going to have a different background colour and show the
 variable name and corresponding hex code inside.
@@ -245,15 +245,15 @@ variable name and corresponding hex code inside.
 Let's first set up a series of variables and then create two lists, one
 for the variable names and one for the list of colours:
 
-{% highlight scss %}
+```scss
 $names: white, red, green, blue, black;
 $colors: #fff, #cc3f85, #9be22d, #66d9ef, #000;
-{% endhighlight %}
+```
 
 We now need to iterate through each name in the list to create
 a modifier class for each of the colours and output its name.
 
-{% highlight scss %}
+```scss
 @each $name in $names {
 	.swatch--#{ $name } {
 		&:before {
@@ -261,13 +261,13 @@ a modifier class for each of the colours and output its name.
 		}
 	}
 }
-{% endhighlight %}
+```
 
 To add the colour, we need a way to reference the `$colors` variable
 from within the loop. To do this we can create a counter variable `$i`
 and use the Sass `nth()` function which returns the nth item in a list.
 
-{% highlight scss %}
+```scss
 $i: 1;
 @each $name in $names {
 	.swatch--#{ $name } {
@@ -283,7 +283,7 @@ $i: 1;
 	}
 	$i: $i + 1;
 }
-{% endhighlight %}
+```
 
 We store the color in a variable so it can be used as both the
 `background-color` and as the `content` property which will display the
@@ -294,17 +294,17 @@ black box because we have black text on a black background. A quick and
 dirty solution to this is to check the `lightness` component of the
 colour and if it's less than `50%`, set the text colour to white.
 
-{% highlight scss %}
+```scss
 @if lightness( $color ) < 50% {
 	color:#fff;
 }
-{% endhighlight %}
+```
 
 To browse through the full code for this example, head to
 [atozsass.com/l](http://www.atozsass.com/l) for the transcript or [edit
 on Codepen](http://codepen.io/atozcss/pen/YqpQRW).
 
-{% highlight scss %}
+```scss
 $names: white, red, green, blue, black;
 $colors: #fff, #cc3f85, #9be22d, #66d9ef, #000;
 
@@ -342,7 +342,7 @@ $i: 1;
 	}
 	$i: $i + 1;
 }
-{% endhighlight %}
+```
 
 For a more complex use of loops and conditional statements, and to
 improve on our quick and dirty method of switching the text colour for

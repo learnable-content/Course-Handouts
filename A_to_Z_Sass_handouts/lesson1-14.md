@@ -52,9 +52,9 @@ tweaks and changes to illustrate some of Bourbon's features.
 Firstly, to start using Bourbon we have to `@import` it into our project
 (having gone through the installation steps).
 
-{% highlight scss %}
+```scss
 @import 'boubon/bourbon';
-{% endhighlight %}
+```
 
 We now have access to all of Bourbon's features which mostly come in the
 shape of mixins. For a full list of what Bourbon can do for you, head to
@@ -90,14 +90,14 @@ There's also variables for `$all-text-inputs-hover` and
 `$all-text-inputs-focus` but I'd just use a bit of nesting and the Sass
 ampersand to reference the parent here as it's quicker to type.
 
-{% highlight scss %}
+```scss
 #{$all-text-inputs} {
 	&:hover,
 	&:focus {
 		background:#fff;
 	}
 }
-{% endhighlight %}
+```
 
 Bourbon originally contained a lot of mixins that output vendor prefixes
 for fancy new CSS3 properties like animations, transitions,
@@ -128,9 +128,9 @@ a Neat grid.
 Once Neat is installed, the first step is to `@import` the neat
 library into your Sass files. 
 
-{% highlight scss %}
+```scss
 @import 'neat/neat';
-{% endhighlight %}
+```
 
 With the libraries imported, we're able to start building a grid. 
 

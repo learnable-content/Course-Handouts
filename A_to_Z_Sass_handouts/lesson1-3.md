@@ -18,69 +18,69 @@ Each colour function takes a base colour - which can be any valid colour
 format such as a keyword, hex code, rgb value, hsl value or a variable
 - and the modify it by a certain amount (often as a percentage).
 
-{% highlight scss%}
+```scss
 function( $color, $amount );
-{% endhighlight %}
+```
 
 Let's illustrate some of the most useful colour functions with an
 example. Here I have a box with a background colour which is defined by
 the variable `$base-color`.
 
-{% highlight scss%}
+```scss
 $base-color: #cc3f85;
 
 .box {
 	background: $base-color;
 }
-{% endhighlight %}
+```
 
 I could lighten the colour slightly with the `lighten()` function.
 
-{% highlight scss%}
+```scss
 .box {
 	background: lighten( $base-color, 20% );
 }
-{% endhighlight %}
+```
 
 Or darken the base colour by a certain percentage:
 
-{% highlight scss%}
+```scss
 .box {
 	background: darken( $base-color, 20% );
 }
-{% endhighlight %}
+```
 
 The colour could be more saturated or desaturated too:
 
-{% highlight scss%}
+```scss
 .box {
 	background: saturate( $base-color, 20% );
 	background: desaturate( $base-color, 20% );
 }
-{% endhighlight %}
+```
 
 The colour could be inverted, made grayscale or turned into its
 complimentary colour (which is its opposite colour on the colour wheel).
 
-{% highlight scss%}
+```scss
 .box {
 	background: invert( $base-color );
 	background: grayscale( $base-color );
 	background: complement( $base-color );
 }
-{% endhighlight %}
+```
 
 There are a number of functions available for making a colour more
 transparent or more opaque which take a decimal rather than a percentage
 - just like when setting the alpha channel in `rgba` or `opacity`.
 
-{% highlight scss%}
+```scss
 .box {
 	background: transparentize( $base-color, 0.5 );
 	background: opacify( $base-color, 0.3 );
 	background: rgba( $base-color, 0.4 );
 }
-{% endhighlight %}
+```
 
 
 
@@ -94,32 +94,32 @@ together:
 
 First let's lighten the `$base-color`
 
-{% highlight scss%}
+```scss
 .box {
 	background: lighten( $base-color, 20% );
 }
-{% endhighlight %}
+```
 
 This can the be saturated by wrapping the saturate function around the
 lighten function. Think of the colour being passed to `saturate` is the
 result of running the `lighten` function.
 
-{% highlight scss%}
+```scss
 .box {
 	background: saturate( lighten( $base-color, 20% ), 10% );
 }
-{% endhighlight %}
+```
 
 If you find this a bit awkward to read, you could create a variable for
 the lightened colour and just pass that to `saturate`:
 
-{% highlight scss%}
+```scss
 $lightened-color: lighten( $base-color, 20% );
 
 .box {
 	background: saturate( $lightened-color, 10% );
 }
-{% endhighlight %}
+```
 
 I personally prefer the first, one line option because it keeps
 everything together and reduces the need for additional global
@@ -147,14 +147,14 @@ a gradient and some subtle shadows. This might sound like some kind of
 dated web 2.0 horror show but we can handle this tastefully - I'm
 convinced that gradients will be back in fashion soon, just you wait!
 
-{% highlight css %}
+```css
 .button {
 	padding:0.5em 2em;
 
 	color:#222;
 	background:lightblue;
 }
-{% endhighlight %}
+```
 
 So to add these features, instead of picking colours out of a design
 file, let's use Sass.
@@ -162,36 +162,36 @@ file, let's use Sass.
 I'll start by making the existing background colour a variable and then
 add a thin border which is a darker version of the original blue.
 
-{% highlight css %}
+```css
 $color-button: lightblue;
 .button {
 	background:$color-button;
 	border:1px solid darken( $color-button, 15% );
 }
-{% endhighlight %}
+```
 
 To give a bit more depth to the button, I'll add a light blue inset
 shadow at the top of button:
 
-{% highlight css %}
+```css
 $color-button: lightblue;
 .button {
 	background:$color-button;
 	border:1px solid darken( $color-button, 15% );
 	box-shadow: inset 0 1px lighten( $color-button, 20% );
 }
-{% endhighlight %}
+```
 
 And then wrap everything up with a subtle gradient:
 
-{% highlight css %}
+```css
 $color-button: lightblue;
 .button {
 	background: linear-gradient( $color-button, darken( $color-button, 15% ) );
 	border:1px solid darken( $color-button, 15% );
 	box-shadow: inset 0 1px 1px lighten( $color-button, 20% );
 }
-{% endhighlight %}
+```
 
 Now imagine we want to change the button colour. Because we've created a 
 system for styling buttons where all the colours are modified from
@@ -202,26 +202,26 @@ To make this code even more flexible and allow us to generate all sorts
 of different coloured buttons, we could turn our button class into
 a button mixin.
 
-{% highlight scss %}
+```scss
 @mixin button( $color-button ) {
 	padding:1em;
 	background:linear-gradient( $color-button, darken( $color-button, 15% ));
 	border:1px solid darken( $color-button, 15% );
 	box-shadow: inset 0 1px 1px lighten( $color-button, 20% );
 }
-{% endhighlight %}
+```
 
 Now this mixin can be used to generate buttons of all different colours
 by including them as needed.
 
-{% highlight scss %}
+```scss
 .button {
 	@include button( lightblue );
 }
 .button--pink {
 	@include button( hotpink );
 }
-{% endhighlight %}
+```
 
 If you're new to Sass and want more info about variables and mixins and
 other Sass features, do check out my Up and Running with Sass ebook

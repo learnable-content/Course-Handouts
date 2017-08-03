@@ -16,19 +16,19 @@ pieces that make up a mixin.
 First, we declare a mixin with the `@mixin` directive followed by a name
 for the mixin.
 
-{% highlight scss %}
+```scss
 @mixin uppercase-letter-spacing {
 	letter-spacing: 2px;
 	text-transform: uppercase;
 }
-{% endhighlight %}
+```
 
 The mixin name is optionally followed by a set of parentheses where we
 define any input parameters. These are then made available as variables
 within the mixin to enable the output CSS to change based on the
 input values when the mixin is included.
 
-{% highlight scss %}
+```scss
 @mixin uppercase-letter-spacing( $letter-spacing, $font-size ) {
 	font-size: $font-size;
 	letter-spacing: $letter-spacing;
@@ -37,7 +37,7 @@ input values when the mixin is included.
 h1 {
 	@include uppercase-letter-spacing( 4px, 2rem );
 }
-{% endhighlight %}
+```
 
 When the mixin is used, the styles within the body of the mixin are
 output where the mixin is called with `@include`.
@@ -46,7 +46,7 @@ Some mixins may output other selectors instead of outputting
 properties and values. To do this, we use the `@content` directive
 within the body of the mixin. 
 
-{% highlight scss %}
+```scss
 @mixin hover-focus-active {
 	&:hover,
 	&:focus,
@@ -54,12 +54,12 @@ within the body of the mixin.
 		@content;
 	}
 }
-{% endhighlight %}
+```
 
 When this type of mixin in included, we use curly braces to define where
 the content of the mixin starts and ends.
 
-{% highlight scss %}
+```scss
 a {
 	color: #f00;
 
@@ -68,11 +68,11 @@ a {
 		background: #000;
 	}
 }
-{% endhighlight %}
+```
 
 This would then compile into 
 
-{% highlight css %}
+```css
 a {
 	color: #f00;
 }
@@ -82,7 +82,7 @@ a:active {
 	color: #fff;
 	background: #000;
 }
-{% endhighlight %}
+```
 
 Mixins are very useful and can be a great time saver. But when you're
 first learning Sass, it can be hard to see what you might use them for
@@ -99,7 +99,7 @@ CSS to handle vendor prefixes in the selector. Creating a mixin allows
 us to set the selection text colours once and have them replicated as
 necessary.
 
-{% highlight scss %}
+```scss
 @mixin selection( $background, $foreground:#fff ) {
 	::-moz-selection { 
 		background: $background;
@@ -113,7 +113,7 @@ necessary.
 	}
 }
 @include selection( #000, #ccc );
-{% endhighlight %}
+```
 
 
 
@@ -126,7 +126,7 @@ targeted separately.
 Here the placeholder styles can be defined once and passed to `@content`
 in each of the four input placeholder selectors.
 
-{% highlight scss %}
+```scss
 @mixin form-placeholder {
 	::-webkit-input-placeholder {
 		@content;
@@ -145,7 +145,7 @@ in each of the four input placeholder selectors.
 	color:#ccc;
 	font-style:italic;
 }
-{% endhighlight %}
+```
 
 
 
@@ -155,7 +155,7 @@ Centring elements is a common practice and can be accomplished with
 fairly minimal CSS. But it's such a common practice that it's often
 simpler to write a single line instead of three or four.
 
-{% highlight scss %}
+```scss
 // Center Block
 //
 @mixin center-block {
@@ -180,7 +180,7 @@ simpler to write a single line instead of three or four.
 	top: 50%;
 	transform: translateY( -50% );
 }
-{% endhighlight %}
+```
 
 Creating mixins for common styles like this could be considered an
 abstraction too far and perhaps makes the code less meaningful. Use your
@@ -201,7 +201,7 @@ element is definitely not visible to sighted users. This is really the
 only time such liberal use of `!important` makes sense - try to avoid it
 for getting out of specificity trouble.
 
-{% highlight scss %}
+```scss
 @mixin visuallyhidden {
 	border: 0 !important;
 	clip: rect(0 0 0 0) !important;
@@ -212,7 +212,7 @@ for getting out of specificity trouble.
 	position: absolute !important;
 	width: 1px !important;
 }
-{% endhighlight %}
+```
 
 I keep all my mixins in their own `_mixins.scss` partial in each of my
 projects to keep them all together and provide a logical place for any

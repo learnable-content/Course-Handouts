@@ -44,9 +44,9 @@ a `main.scss` file and a `css` folder where the styles will be compiled.
 With Node and `npm` installed, next we need to install Grunt. This is
 done from the command line with the following command:
 
-{% highlight bash %}
+```scss
 npm install grunt-cli -g
-{% endhighlight %}
+```
 
 The `-g` stands for "global" and this will install the Grunt command
 line interface so it can be used on any of your projects. This is
@@ -60,9 +60,9 @@ and compiling Sass.
 
 On the command line, ensure you're in the project folder and run
 
-{% highlight bash %}
+```scss
 npm init
-{% endhighlight %}
+```
 
 Answer the questions if you're setting up a real project or just hit
 enter to use the defaults.
@@ -72,20 +72,20 @@ one for watching files for changes and one for compiling Sass. Run the
 following command to install these packages and save the details to the
 `package.json`
 
-{% highlight bash %}
+```scss
 npm install --save-dev grunt grunt-contrib-watch grunt-contrib-sass
-{% endhighlight %}
+```
 
 If you look in your package.json file, there should be a list of the
 3 packages that were just installed:
 
-{% highlight json %}
+```
 "devDependencies": {
 	"grunt": "^0.4.5",
 	"grunt-contrib-sass": "^0.9.2",
 	"grunt-contrib-watch": "^0.6.1"
 }
-{% endhighlight %}
+```
 
 With everything installed, we now need to create a configuration file to
 tell Grunt what we want it to do.
@@ -94,7 +94,7 @@ Create a new file named `gruntfile.js` in the root of the project and
 add the following code (just head to
 [atozsass.com/g](http://www.atozsass.com/g) to copy and paste!):
 
-{% highlight js %}
+```js
 module.exports = function( grunt ) {
 	grunt.initConfig({
 		sass: {
@@ -115,7 +115,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.registerTask( 'default', ['watch'] );
 }
-{% endhighlight %}
+```
 
 This sets up two Grunt tasks, one called `watch` that watches our Sass
 files for changes and one called `sass` that compiles `main.scss` into
@@ -165,30 +165,30 @@ installed, you can skip this step.
 
 To install Gulp, run the following command.
 
-{% highlight bash %}
+```scss
 npm install -g gulp
-{% endhighlight %}
+```
 
 We now need to create a `package.json` which will list all the packages
 needed for the Gulp tasks.
 
-{% highlight bash %}
+```scss
 npm init
-{% endhighlight %}
+```
 
 Now we need to install a local version of Gulp and the Gulp Sass
 package:
 
-{% highlight bash %}
+```scss
 npm install --save-dev gulp gulp-sass
-{% endhighlight %}
+```
 
 With the packages installed, we create a configuration file to set up
 our tasks. Create a `gulpfile.js` in the project root with the following
 code (just head to
 [atozsass.com/g](http://www.atozsass.com/g) to copy and paste!):
 
-{% highlight js %}
+```js
 var gulp = require( 'gulp' );
 var sass = require( 'gulp-sass' );
 
@@ -201,7 +201,7 @@ gulp.task( 'sass', function() {
 gulp.task( 'default', function() {
 	gulp.watch( 'scss/**/*.scss', ['sass'] );
 });
-{% endhighlight %}
+```
 
 Now to run the tasks, we use the `gulp` command followed by the task
 name. To compile your styles once, run `gulp sass`. To watch for changes

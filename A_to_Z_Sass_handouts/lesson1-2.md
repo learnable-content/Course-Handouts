@@ -16,11 +16,11 @@ because it uses a notation of double underscores and double dashes to
 demonstrate whether a particular class is a Block, Element or Modifier.
 The syntax looks as follows:
 
-{% highlight css %}
+```css
 .block { }
 .block__element { }
 .block--modifier { }
-{% endhighlight %}
+```
 
 It might look a bit ugly but it can really help to make your code more
 readable so bear with me.
@@ -33,9 +33,9 @@ fame.
 We can refer to this whole thing as a BEM "block" and we might give it the
 class name of `.media`.
 
-{% highlight css %}
+```css
 .media { }
-{% endhighlight %}
+```
 
 This media block has two parts to it: the media part (which is often an
 image) and the text content.
@@ -43,11 +43,11 @@ image) and the text content.
 We could refer to the image and text as elements within the media block
 and with BEM syntax, this would be written as follows:
 
-{% highlight css %}
+```css
 .media { }
 .media__image { }
 .media__content { }
-{% endhighlight %}
+```
 
 Perhaps we'd also like the flexibility of a media block with the image
 on the right and the content on the left. For this we could use
@@ -55,14 +55,14 @@ a *modifier class* which is added to the parent block. This class can be
 used to modify the styles of the elements within and could be written as
 follows:
 
-{% highlight css %}
+```css
 .media--flipped { 
 	.media__image { 
 		float:right; 
 		margin-left:1em;
 	}
 }
-{% endhighlight %}
+```
 
 This method of naming classes works well and I use it a lot in my day to
 day work. But one complaint of this system is that the class names are
@@ -83,7 +83,7 @@ with BEM.
 Going back to the previous example, here's the full code for our media
 block in "normal" CSS.
 
-{% highlight css %}
+```css
 .media {
 	overflow:hidden; // or alternative clearfix technique
 }
@@ -102,13 +102,13 @@ block in "normal" CSS.
 	display:table-cell;
 	width:10000px;
 }
-{% endhighlight %}
+```
 
 `media` is repeated in each selector and repetition is something we
 often want to reduce in our code. Instead, this syntax can be re-written
 with nesting and the Sass ampersand:
 
-{% highlight css %}
+```css
 .media {
 	overflow:hidden;
 
@@ -129,7 +129,7 @@ with nesting and the Sass ampersand:
 		width:10000px;
 	}
 }
-{% endhighlight %}
+```
 
 Normally, nesting selectors like this produces descendent selectors in
 the compiled CSS but using the ampersand as the first character in the
@@ -161,7 +161,7 @@ If you like the nested BEM syntax but still want a searchable codebase
 you could always add a comment before each selector which could be
 searched for.
 
-{% highlight css %}
+```css
 .media {
 	// .media__image
 	&__image { }
@@ -169,7 +169,7 @@ searched for.
 	// .media__content
 	&__content { }
 }
-{% endhighlight %}
+```
 
 Another tip for working with BEM is to really think about how you create
 your modules so they can be kept as compact as possible to improve
@@ -186,19 +186,19 @@ or `.products` and using that as the base "block" for all my BEM
 classes. This leads to a lot of really long and complex class names
 which is less than ideal and very tedious to type.
 
-{% highlight css %}
+```css
 .home { }
 .home__title { }
 .home__features { }
 .home__features-item { }
 .home__features-item-title { }
 .home__features-item-title--center { }
-{% endhighlight %}
+```
 
 Instead, the `.home__features-item` should be its own component
 - perhaps just called `.feature` - with its own elements and modifiers.
 
-{% highlight css %}
+```css
 .home { }
 .home__title { }
 
@@ -206,7 +206,7 @@ Instead, the `.home__features-item` should be its own component
 .feature { }
 .feature__title { }
 .feature__title--center { }
-{% endhighlight %}
+```
 
 Naming things is hard but using a system like BEM can help focus your
 thinking and add meaning and structure to your code which is important

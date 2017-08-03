@@ -31,9 +31,9 @@ border-radius and line height. Numbers come in a few different flavours
 including integers (whole numbers), floating points (decimals) and length
 values like `10px`, `20em` or `50%`.
 
-{% highlight scss %}
+```scss
 1, 2, 3, 0.1, 5.3, 10px, 20em, 50%
-{% endhighlight %}
+```
 
 ### Strings
 
@@ -42,9 +42,9 @@ families, colours and URLs. String in CSS are found both with and
 without surrounding quotation marks and are said to be "quoted" or
 unquoted strings. 
 
-{% highlight scss %}
+```scss
 "Times New Roman", '../images/logo.png', red, sans-serif
-{% endhighlight %}
+```
 
 Sass (just like CSS) doesn't differentiate between strings with quotes
 and strings without quotes. The only exception is when dealing with some
@@ -64,12 +64,12 @@ Colours have their own data type because they can be manipulated by
 [color functions](http://www.atozsass.com/c) and be added and subtracted
 from each other to produce new colours.
 
-{% highlight scss %}
+```scss
 $named-color: black
 $hex-color:   #000
 $rgba-color:  rgba( 0, 0, 0, 1 )
 $hsla-color:  hsl( 0, 0%, 0%, 1 )
-{% endhighlight %}
+```
 
 ### Boolean
 
@@ -86,7 +86,7 @@ variables
 a variable contains a null value, applying this to a CSS property will
 cause that line of code to be removed at compile time:
 
-{% highlight scss %}
+```scss
 $font-size: null;
 $line-height: 1.2;
 
@@ -100,7 +100,7 @@ $line-height: 1.2;
 	line-height: 1.2;
 }
 */
-{% endhighlight %}
+```
 
 ### Lists
 
@@ -109,11 +109,11 @@ used to represent shorthand declarations like `margin` and `padding` or
 for font stacks. You can have a list that contains other
 variables or even a list of lists.
 
-{% highlight scss %}
+```scss
 $space-separated-list: 0 0 20px 0;
 $comma-separated-list: Helvetica, Arial, sans-serif;
 $variable-list: $space-separated-list, $comma-separated-list;
-{% endhighlight %}
+```
 
 ### Maps
 
@@ -122,7 +122,7 @@ variables. These contain a store of key and value pairs like
 a JavaScript object or Ruby hash and are a very powerful new feature of
 Sass 3.3.
 
-{% highlight scss %}
+```scss
 $font-sizes: (
 	h1: 50px,
 	h2: 36px,
@@ -130,7 +130,7 @@ $font-sizes: (
 	h4: 20px,
 	p:  18px
 );
-{% endhighlight %}
+```
 
 Because there's a lot discuss regarding maps, we'll cover them in detail
 in their own video in Episode 13.
@@ -163,36 +163,36 @@ compiled CSS each time a change is made.
 Lengths with matching units can be added and subtracted from each other.
 However, lengths with matching units can't be multiplied together.
 
-{% highlight scss %}
+```scss
 $a: 20px;
 $b: 10px;
 
 div { width: $a + $b }
 div { width: $a - $b }
-{% endhighlight %}
+```
 
 Dividing lengths with the same units results in a number with no units.
 This can be a handy trick for stripping the units from any length value
 so you can perform further Sass operations on the plain number value.
 
-{% highlight scss %}
+```scss
 $a: 100px;
 $b: 20px;
 
 $number: $a / $b; // 5
-{% endhighlight %}
+```
 
 When dealing with mixed units such as `px` and `em`, Sass will throw an
 error when trying to perform operations on them.
 
-{% highlight scss %}
+```scss
 $a: 20em;
 $b: 10px;
 
 div {
 	padding: $a + $b; // error
 }
-{% endhighlight %}
+```
 
 If you do need to perform calculations with mixed units, this can
 actually be done in normal CSS with the `calc()` function which is
