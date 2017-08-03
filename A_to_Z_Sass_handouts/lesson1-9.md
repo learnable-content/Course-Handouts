@@ -1,32 +1,220 @@
-We've discussed variables and their various data types. Variables can be used to set all sort of values for all sorts of CSS properties. But if a project calls for a variable to be used as a selector name or a property name, we need interpolation to make everything work properly.
+![](headings/1.9.png)
 
-In this video, you'll learn what interpolation means. The difference between string concatenation and interpolation, using variables in selectors and property names. And using variables in media queries for responsive design. Let's start off with a bit of definition. Interpolation is a term often used in mathematics to refer to the practice of constructing new datapoints within the range of an existing set of known datapoints.
+**Variables** can be used to set values of CSS properties but if a project
+calls for using a variable in a selector or property name, we need
+**"interpolation"** to make everything work properly. 
 
-But that still sounds a bit complicated to me. So how about this, interpolation inserts something into something else. In the Sass world, this usually means inserting a Sass expression, such as a variable, a function call or a mathematical calculation into another string, another selector, or another property name.
+## What Does Interpolation Mean?
 
-Sass uses a special syntax for inserting values into other values that take the form of a hash sign with two curly braces, and then the expression goes on the inside of the braces. This syntax is also found in the Ruby programming language, and that's where Sass has its roots.
+Let's start off with a bit of a definition. Interpolation is a term
+often used in mathematics to refer to the practice of "constructing new
+data points within the range of an existing set of known data points".
 
-Let's take the following example, where I've got a variable called image that holds the value logo.png. I've got a selector for the logo, and I want to apply the image as a background image. If I was to write everything out manually, the image URL would look as follows,where we have images/logo.png.
+That still sounds a bit complicated to me so how about this:
 
-But instead of writing it out manually, I'm going to use the variable. If I add the variable name within the URL string, Sass doesn't throw an error but the image doesn't show up. Adding image within the quotes for the path creates a literal string images/$image as the URL, which isn't right.
+Interpolation inserts something into something else.
 
-It isn't point to our image file. If we want image to be used as a Sass variable, we have two options. Firstly, we could use something called string concatenation, which is the process of joining two strings together using a + sign called the + operator. Here we add the string logo.png from the variable onto the end of the images/string in the URL.
+In the Sass world, this usually means inserting a Sass expression
+- a variable, function call or mathematical calculation - into another
+string, a selector or property name.
 
-The second approach is to use interpolation and insert the value of the variable within the URL string. To do that, we can rewrite the code as follows. Within the interpolation braces, the Sass expression is interpreted first, and then inserted within the string. When using interpolation, any Sass expressions such as a function core, or mathematical calculation can be performed.
+Sass uses a special syntax for inserting values into other values that
+takes the form 
 
-And then the result of that expression will be inserted in its place. You might ask why there are two different approaches for doing almost exactly the same thing. Well, interpolation can be used for inserting values into more than just strings. We've just seen two approaches for inserting a variable into a string.
+{% highlight scss %}
+	"This string will have a #{ $variable } inserted into it."
+{% endhighlight %}
 
-But now let's take a look at working with selectors and property names instead. In the following example, I've got three variables. One's called selector, one's called property, and one's called value. Now these could have been named absolutely anything, but I've tried to give them a name to illustrate where they're gonna be used, just for the case of this example.
+This syntax is also found in the Ruby programming language where Sass
+has its roots.
 
-So we can use the value variable in the typical way to set the color property. When the Sass compiles the variable name is substituted for the variable value, which in this case is red. If we want to use the selector variable in the selector itself, we need to use interpolation as string concatenation with the + operator doesn't work.
+Let's look at a series of examples to illustrate how and why to use
+interpolation in Sass.
 
-And this is because + is actually used as an adjacent sibling selector. So instead we use interpolation to create the selector p.highlight in the compiled CSS. We can do a very similar thing to work with a variable within a property name as well. Interpolation is a very useful feature.
 
-Even if variables in selectors or properties aren't as common as using variables for values, it's really great to know that this tool is there when we do need it. One final area where interpolation comes in very useful is when working with media queries. Using variables and media queries is worth looking at because, it can be a bit confusing to know when interpolation is or isn't needed.
 
-So let's take the following example of a breakpoint variable, which is set to a number of pixels. This breakpoint variable can be included in a media query as the value part of a min-width or a max-width media query. Sass has no problem with this at all, and it all works perfectly.
+## Interpolation vs. Concattenation
 
-But imagine if we use these min-width media queries quite a lot and with this particular value, we might get a bit tired of typing out the whole thing of screen and min-width breakpoint all the time. So instead, we could create another variable for the whole query itself, and maybe even interpolation to insert the value of breakpoint.
+Take the following example where I have a variable called `$image` that
+holds the value `logo.png`.
 
-But if we're not to use this query variable for the media query, Sass will throw an error. So there's a very simple workaround for this. And instead of just using the query variable by itself, we can use interpolation and everything works as planned.
+I've got a selector for the logo and I want to apply the image as
+a background image. If I were to write it out manually, the image URL
+would look as follows. 
 
+{% highlight css %}
+.logo {
+	background: url( 'images/logo.png' );
+}
+{% endhighlight %}
+
+But instead of writing it out manually, I'm going to use the variable.
+
+If I add the variable name within the url string, Sass doesn't throw an
+error but the image doesn't show up.
+
+{% highlight scss %}
+$image: 'logo.png';
+
+.logo {
+  background: url( 'images/$image' );
+}
+{% endhighlight %}
+
+Adding `$image` within the quotes for the path creates the litteral
+string `images/$image` as a URL. If we want `$image` to be used as
+a Sass variable we have two options.
+
+Firstly, we could use string concattenation. This is the process of
+joining two strings together using a `+` operator.
+
+{% highlight scss %}
+$logo: 'logo.png';
+
+.logo {
+  background: url( 'images/' + $logo );
+}
+{% endhighlight %}
+
+We add the string `"logo.png"` from the variable onto the end of the
+`"images/"` string in the URL.
+
+Alternatively, we could use interpolation and insert the value of the
+variable within the url string. To do that, we can re-write the code as
+follows:
+
+{% highlight scss %}
+$logo: 'logo.png';
+
+.logo {
+	background: url( 'images/#{ $logo }' );
+}
+{% endhighlight %}
+
+Within the interpolation braces, the Sass expresion is interpreted first
+and then inserted within the string. 
+
+When using interpolation, any Sass expression such as function call or
+mathematical calculation can be performed and the result of the
+expression will be inserted in its place.
+
+You may ask why there are two different approaches for doing almost
+exactly the same thing. Well, interpolation can be used for inserting
+values into more than just strings.
+
+
+
+
+## Interpolating Selectors & Properties
+
+We've just seen two solutions for inserting a variable into a string but
+let's now take a look at working with selectors.
+
+In the following example I have three variables, one called `$selector`
+and one called `$property` and one called `$value`. These variables
+could have been named anything, but I've named them according to where
+they'll be used for this example.
+
+{% highlight scss %}
+$selector: 'highlight';
+$property: 'bottom';
+$value:    red;
+{% endhighlight %}
+
+We can use the `$value` variable in the typical way to set the `color`
+property. When Sass compiles, this variable name is substituted for its
+value "red".
+
+If we wanted to use the `$selector` variable in the selector, we need to
+use interpolation as string concattenation with `+` doesn't work as `+`
+is actually used as an adjacent [sibling selector](http://www.atozcss.com/g).
+
+{% highlight scss %}
+// this won't work
+
+p . + $selector {
+	color: red;
+}
+{% endhighlight %}
+
+Instead, we use interpolation to create the selector `p .highlight` in
+the compiled CSS.
+
+{% highlight scss %}
+p .#{ $selector } {
+	color: red;
+}
+{% endhighlight %}
+
+A similar thing can be done to use a variable within a property name.
+
+{% highlight scss %}
+p .#{ $selector } {
+	color: red;
+	border-#{ $property }: 2px solid;
+}
+{% endhighlight %}
+
+Interpolation is a very useful feature - even if using variables in
+selectors or properties isn't as common as using variables for values,
+it's good to know that this tool is there when needed.
+
+
+
+
+## Interpolation in Media Queries
+
+One final area where interpolation comes in very useful is when working
+with media queries. Variables in media queries is worth looking at
+because it can be a bit confusing to know when interpolation is or is
+not needed.
+
+Take the following example of a `$breakpoint` variable set to a number
+of pixels.
+
+This can be included in a media query as a value as part of
+a `min-width` or `max-width` media query:
+
+{% highlight scss %}
+$breakpoint: 500px;
+
+@media screen and ( min-width: $breakpoint ) {
+	body {
+		font-size: 1.25rem;
+	}
+}
+{% endhighlight %}
+
+Imagine we use these `min-width` media queries a lot; we might get tired
+of typing out `screen and ( min-width: $breakpoint )` all the time.
+Instead, we could create another variable for the whole query and even
+use interpolation to insert the value of our breakpoint:
+
+{% highlight scss %}
+$breakpoint: 500px;
+$query: 'screen and ( min-width: #{ breakpoint } )';
+{% endhighlight %}
+
+If we were now to use this variable for the media query, Sass would
+throw an error. 
+
+{% highlight scss %}
+$breakpoint: 500px;
+$query: 'screen and ( min-width: #{$breakpoint} )'; 
+
+@media $query {
+	body {
+		font-size: 1.25rem;
+	}
+}
+{% endhighlight %}
+
+Instead, we need to use interpolation and everything works as planned.
+
+{% highlight scss %}
+@media #{$query} {
+	body {
+		font-size: 1.25rem;
+	}
+}
+{% endhighlight %}

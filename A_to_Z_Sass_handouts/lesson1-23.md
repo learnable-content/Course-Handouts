@@ -1,36 +1,199 @@
-When crafting complex functions, mixins or perhaps even your own framework or Sass plugin, it can be useful to display messages on the console to ensure your code is working correctly and being used correctly. Sass has three different methods for interacting with the console, which will cover in this episode.
+![](headings/1.23.png)
 
-they are warn, error, and debug. The warn directive prints a warning message into the console where your Sass is compiling. Here's an example, it starts with the @warn directive and then a string containing the message. If you add this code to any Sass file, the warning will be printed to the console every time you save the file.
+When crafting complex functions, mixins or perhaps even your own 
+framework or Sass plugin it can be useful to display messages on the
+console to ensure your code is working correctly and being used
+correctly. 
 
-While this is a simple way to demonstrate what the warn directive is and what it does and how it works, it's not a very useful message. Instead of having the warning display all the time, we can use it within a Sass function or within a mixin to alert the developer under certain circumstances.
+Sass has three different methods of interacting with the
+console which we'll cover in this episode. They are:
 
-For example, we might want to warn about the improper use of some arguments, or to add a deprecation warning about the use of an old function. So in this example, I've put a function that we created in a previous screen cast that converts pixels into rems. Let's imagine that this function is part of a Sass library, or part of a framework that is used on multiple projects by multiple developers.
+* @warn
+* @error
+* @debug
 
-Maybe like a small version of the Bootstrap library or the foundation framework. Let's say that we're the developers of this framework and we want to rename one of the functions, but we don't wanna create a breaking change in the code. We don't want all other people who use our wonderful library or wonderful framework to suddenly have to go and change all of that code just cuz we made a small update.
 
-So the px-to-rem function is a bit of a long name. And instead we might want to rename it so it's just called the rem function. If we just rename the function, then any instances in the code where that function is used will now throw errors. So to ensure that our new shortened function name doesn't create this breaking change, we can create a new function with the same name as the old one which calls the new one.
+## @warn
 
-So we take our existing px-to-rem function. We rename it to now be called the rem function, but then we create a new function called px-to-rem which calls the rem function. And to let the developer know what's going on behind the scene. So they can be aware of what's changed.
+The `@warn` directive prints a warning message to the console.
 
-We can then add a warning message into the px-to-rem function. So for example, the px-to-rem function has been deprecated and will be removed in a future version, use the rem function instead. Now, when we use the old function, there are no errors thrown, but the developer is alerted to the fact that there is a new shorter-named function that they can use instead.
+	@warn 'this is a test warning message!';
 
-In a similar fashion to the warn directive, the error directive can be used to display a custom error message in the console. It looks like this. We have @error and then a string of texts which describes the error in question. One difference between a warning message and an error message is how they display on the console.
+If you add this code to any Sass file, the warning will be printed to
+the console on every save of the file.
 
-But the key difference is that the error directive will stop the compiler at the point of the error. Whereas the warn directive is just a warning and the compiler will continue and keep going. And such, the erro directive should be used to alert the developer something fatal has happened with something that needs to be corrected before proceeding.
+	WARNING: this is a test warning message!
+         on line 3 of assets/scss/_functions.scss
+         from line 1 of assets/scss/style.scss
 
-So a classic example of this is when using incompatible values in a functional mixin. Let's take a look at an example. Using our rem function from the previous example, we might want to throw an error if If units other than pixels are passed into our function for conversation.
+While this is a simple way to demonstrate what the `@warn` directive is,
+it's not a particularly useful message.
 
-Because if they were, they wouldn't give us the results that we're expecting. So to handle this, we could add a conditional statement before the main body of the function to catch any values that are not unitless or not in pixels. If we try to call the rem function with an value now, our error is thrown.
+Instead of having the warning display always, we can use it within
+a Sass function or mixin to alert the developer under certain
+circumstances. For example, we may want to warn about improper use of
+arguments or add deprecation warnings about use of an old function.
 
-To make @error message even more helpful, we could output the value which cause the error in to the message using some sass string interpolation. Now that is much more useful. Finally, the debug directive can be used when you are in the process of developing your own functions and mixins.
+In this example, I've got a function we created in a previous screencast
+that converts pixels to rems. Let's imagine that this function is part
+of a Sass library or framework that's used on multiple projects by
+multiple developers - like the Bootstrap or Foundation framework for
+example.
 
-This is a bit like the console.log function used when developing in debug and code in JavaScript. Like the warn directive, the debug directive doesn't stop the compiler running, and it just prints out a message into the console. Here, we're printing out the value passed into the function before we strip its units, and then again, afterwards, to ensure that we see the expected behavior.
+As the developers of the framework we want to rename a function but
+don't want to create a breaking change in the code. The `px-to-rem`
+function is a bit long and instead could be renamed to just `rem`. 
 
-So, we've just added a couple of lines into our rem function. The first one, prints out the initial value then we stripped the units then we printout the modified value. Instead of writing out a debug message, it's also a possible to debug just a variable or the result of running an expression.
+	@function strip-units( $length ) {
+		@return $length / ( ( $length * 0 ) + 1 );
+	}
+	@function px-to-rem( $value ) {
+		$value: strip-units( $value );
+		$base-font-size: strip-units( $base-font-size );
 
-So if we debug a variable value that will print a value into the console or if we debug an expression like (value / $base- font- size) * 1rem, it will print out the result of executing that expression. Each of these directives the warn, the error, the debug are useful in the rem write.
+		@return ( $value / $base-font-size ) * 1rem;
+	}
+	h1 {
+		font-size: px-to-rem( 64px );
+	}
 
-But when they're combined together like these, it allows you to create some really robust code that clearly communicates back if it's being used incorrectly or sub optimally. Warn and error are particularly useful if you're developing something for many people to use, if you're developing a framework or a boiler plate, or something like that.
+If we just rename the function then any instances in the code where the
+function is used will now throw errors.
 
-Whereas the debug directive will be really useful, whether you're working solo, or working as part of a large team.
+	@function rem( $value ) {
+		$value: strip-units( $value );
+		$base-font-size: strip-units( $base-font-size );
 
+		@return ( $value / $base-font-size ) * 1rem;
+	}
+	h1 {
+		font-size: px-to-rem( 64px ); // throws undefined function error
+	}
+
+To ensure our new shortened function name doesn't create a breaking
+change we can create a function with the same name as the old one that
+calls the new one.
+
+	@function px-to-rem( $value ) {
+		@return rem( $value );
+	}
+
+And to let the developer know what's going on behind the scenes - so
+they can be aware of what's changed - we can then add a warning message.
+
+	@function px-to-rem( $value ) {
+		@warn 'The `px-to-rem()` function has been deprecated and will be
+		removed in a future version. Use `rem()` instead.'
+
+		@return rem( $value );
+	}
+
+Now when we use the old function there are no errors thrown but the
+developer is alerted to the fact that there's a new, shorter named
+function they can use instead.
+
+
+## @error
+
+In a similar fashion to the `@warn` directive, the `@error` directive
+can be used to display a custom error message in the console.
+
+	@error 'This is a test error message!'
+
+One difference between a warning message and an error message is how
+they display on the console.
+
+	error assets/scss/_functions.scss (Line 3: this is a test error message!)
+
+But the key difference is that the `@error` directive will stop the
+compiler at the point of error whereas when a `@warn` directive is
+reached, the compiler keeps going.
+
+As such, the `@error` directive should be used to alert the developer
+that something fatal has happened which needs to be corrected before
+proceeding. A classic example of this is when using incompatible values
+in a function or mixin. Let's take a look at an example.
+
+Using our `rem` function from the previous example, we might want to
+throw an error if units other than pixels are passed to our function for
+conversion.
+
+To handle this, we can add a conditional statement before the main body
+of the function to catch values that are not unitless or in pixel units.
+
+	@function rem( $value ) {
+
+		@if unitless( $value ) or unit( $value ) == 'px' {
+			$value: strip-units( $value );
+			$base-font-size: strip-units( $base-font-size );
+
+			@return ( $value / $base-font-size ) * 1rem;
+		} @else {
+			@error 'Only unitless or px values should be passed to `rem()`';
+		}
+	}
+
+If we try to call the `rem()` function with an `em` value, our error is
+thrown.
+
+	h1 {
+		font-size: rem( 3em ); // throws an error
+	}
+
+To make our error message even more helpful, we can output the value
+within the message using Sass string interpolation:
+
+	@else {
+		@error 'Invalid value of #{ $value } passed to `rem()`. Only unitless or px values should be used.';
+	}
+
+Much better.
+
+
+## @debug
+
+Finally, the `@debug` directive can be used when you're in the process
+of developing your own functions and mixins. This is a bit like the
+`console.log` function used when developing and debugging code in
+JavaScript.
+
+Like the `@warn` directive, `@debug` doesn't stop the compiler running
+and just prints a messgage to the console. As we saw above, you can use
+string interpolation to print the value of variables to the console
+which is incredible useful.
+
+Here we are printing out the value passed to the function before we
+strip its units and then again after to ensure we see the expected
+behaviour.
+
+	@function rem( $value ) {
+
+		@if unitless( $value ) or unit( $value ) == 'px' {
+
+			@debug 'Initial value: #{ $value }';
+			$value: strip-units( $value );
+			@debug 'Stripped units value: #{ $value }';
+
+			$base-font-size: strip-units( $base-font-size );
+			@return ( $value / $base-font-size ) * 1rem;
+
+		} @else {
+			@error 'Invalid value of #{ $value } passed to `rem()`. Only unitless or px values should be used.';
+		}
+	}
+
+Instead of writing out a debug message it's also possible to debug just
+a variable or the result of an expression:
+
+
+	@debug $value;
+	@debug ( $value / $base-font-size ) * 1rem;
+
+Each of these directives are useful in their own right but when combined
+together like this, allow you to create very robust code that clearly
+communicated back if it's being used incorrectly or sub-optimally.
+
+`@warn` and `@error` are particularly useful if you're developing
+a framework or your own boilerplate code that might be used by a number
+of people but `@debug` will be useful wether you're a solo developer or
+work as part of a large team.

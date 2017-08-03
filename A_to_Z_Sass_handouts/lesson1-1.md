@@ -1,3 +1,5 @@
+![](headings/1.1.png)
+
 Hello and welcome to **A to Z Sass** and to a brand new video series. Over the next 26 episodes, we're going to be diving into the CSS pre-processor, **Sass**, and looking at a different topic, or a different concept, or a different feature or tool.
 
 In this lesson let's talk about the Sass ampersand character `&`. This single character is a powerful part of the Sass language and has a number of different uses. In this episode, you'll also learn about nesting and the Sass parents selector, the reverse parent selector and the double ampersand selector.

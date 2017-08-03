@@ -1,36 +1,173 @@
-Today we're talking about extending Sass. This is an advanced topic, but one that can be very useful when you need to leverage more powerful programming features than Sass alone can provide. Just to be clear, we're not talking about the Sass @extend directive, we've covered that in an earlier video in the series.
+![](headings/1.24.png)
 
-Today, we're talking about extending the capabilities of the Sass compiler using the Ruby API. As I said, this is an advanced topic and would ordinarily require some knowledge of the Ruby programming language. But instead of focusing on programming some complex functionality in Ruby, we'll focus on how we actually extend Sass, the specific steps to create and use a custom Ruby function in your styles.
+Today we're talking about extending Sass. This is an advanced topic but
+one that can be very useful when you need to leverage more powerful
+programming power than Sass alone can provide.
 
-Even if you're not familiar with Ruby, you should still be able to follow along, and start to see the kinds of things that are possible when using this technique. First, let's have a quick chat about why you might want to do this. As we've seen throughout this series, Sass is a powerful tool that brings programming features like variables, functions, conditional statements, and loops for use in crafting of styles.
+Just to be clear, we're not talking about the Sass `@extend` directive;
+we covered that in an earlier video in this series.  Today we're talking
+about extending the capabilities of the Sass compiler using the Ruby
+API.
 
-There are a number of things that Sass can't do though, such as complex maths, working with image data, or working with environment, or the file system. The Compass library use the same kind of techniques as we're going to look at in today's video, to add additional functionality to Sass to help with these more complex requirements.
+This is an advanced topic and would ordinarily require some knowledge of
+the Ruby programming language. 
 
-Since Compass is now deprecated, you may not want to use it in your projects, but you might want to bring in certain aspects of its functionality, or add similar functionality depending on your specific needs. Extending Sass with custom Ruby functions is one way to do that. So let's take a look at what's involved.
+But instead of focusing on programming some complex functionality in
+Ruby we'll focus on how we actually extend Sass - the specific
+steps to create and use a custom Ruby function in your styles. 
 
-There is a small part of the Sass documentation which talks about extending Sass in this way. And in the documentation, the Ruby function that they use is one that reverses a string. It's not very useful, but it will allow us to take the example from the documentation as a starting point without having to first learn a whole new language.
+Even if you're not familiar with Ruby you should still be able to follow
+along and start to see the kind of things that are possible using this
+technique. First let's have a quick chat about why you might want to do
+this.
 
-So here's the function from the documentation. It's part of the Sass script functions module, and it defines a reverse function. The def method is what we used in Ruby to define a function. And so this function reverse takes in a string then creates a new string value which is the result of reversing the string that is passed in.
 
-It looks a little bit strange, and especially if you're not used to Ruby. This might look a little bit odd but the concept is we have a reverse function, which takes in a string of characters and reverses them. So ABC would become CBA. So now that we have a general understanding of what this function is and what it does, let's look at some more details.
+## Why Extend Sass with Ruby?
 
-There are a couple of other parts to this ruby snippet that are worth noting. Firstly, our custom reverse function is defined inside of the module, Sass script functions. And this is how we're extending the functionality of Sass with our own custom function. The second thing is that before ending the snippet, we have to declare the new reverse function and the arguments that it accepts in order for this new function to correctly be handed to Sass.
+As we've seen throughout this series, Sass is a powerful tool that
+brings programming features like variables, functions, conditional
+statements and loops for use in crafting your styles.
 
-So we have this new function, how do we use it? To add a new function to Sass, we need to create a Ruby file which is just a normal text file with a dot RB file extension. Once we've created this ruby file and put our ruby function inside of it, we'll then run the Sass compiler but run it with an additional command line flag which will include this Ruby file to extend the functionality of Sass.
+There are a number of things that Sass can't do though such as complex
+math, working with image data or working with environment variables.
+For certain projects these kinds of things might be useful. In fact,
+these things are all features of the (now deprecated) Compass extension for Sass.
 
-So I've got a simple project here with an assets folder which contains a folder for my SCSS and a folder for my complied CSS. The SCSS is very sparse and just contains a handful styles that output the word SitePoint into the body of the page via a pseudo-element.
+The Compass library used the same kind of technique as we're going to
+look at today to add additional functionality to Sass to help with these
+more complex requirements.
 
-We're going to extend Sass with our reverse function, to reverse the content in the pseudo-element. The first thing I'll do, is create a folder for the new Sass function. I'll create a lib folder within the assets folder. And within that, create a reverse.rb file to hold our Ruby function.
+Since Compass is now deprecated you may not want to use it in your
+projects but might want to bring in certain aspects of its functionality
+or add similar functionality depending on your specific needs.
 
-Within this file, we first need to require the Sass library, and that enables us to extend its functionality. This is a little bit like the import statement in Sass itself. It's like we're bringing the Sass library into this Ruby file, so that we can do something to it.
+Extending Sass with custom Ruby functions is one way to do that. Let's
+take a look at what's involved.
 
-Underneath that, we'll paste in the snippet of code from the Sass documentation site. After saving the file, we can now update our Sass code to use this new function. So inside of that content property, in the after pseudo-element, we're going to output the result of reversing the string SitePoint.
 
-But when our styles compile, we actually see the function called to reverse rendered in the browser, which is not ideal. To complete the process of extending Sass, we need to include our custom Ruby file at compile time. And to do this, we need to head to the terminal, stop the task compiler if it's already running.
+## The Ruby Function
 
-And to include our Ruby file with the reverse function or any other custom Ruby file if you have multiple. We need to change the way that we run the Sass command. If we wanted to run the Sass compiler once, would use a command like this, Sass. And then the input path for the Sass file, colon, and then the output path.
+From the docs - Reverse a string. Not very useful but it will allow us
+to take the example from the Sass documentation as a starting point
+without having to learn a whole new language.
 
-To include our custom function, we'd add a -r flag, and the path to our file, -r for Ruby. This loads our new function into the Sass functions module and our styles compile without any errors. If we take a look in the browser, we should see the content has been reversed.
+Here's the function from the Sass documentation:
 
-While this is a somewhat trivial example of just reversing some text, and it's unlikely that you'll ever want to do that in a real project. This concept of extending Sass is a really interesting one. The Sass language is already incredibly powerful. But if you want to or need to at the full power of a programming language like Ruby to perform complex functionality, then this could open up some really interesting possibilities.
+	module Sass::Script::Functions
+	  def reverse(string)
+	    assert_type string, :String
+	    Sass::Script::Value::String.new(string.value.reverse)
+	  end
+	  declare :reverse, [:string]
+	end
 
+This defines a new function called `reverse` which takes an input
+`string`, ensure that we are working with a string value and then
+returns a new Sass string which is the result of reversing the order of
+the characters in the input string. 
+
+That all sounds a bit abstract so let's use a hypothetical example. If
+I called this new `reverse` function with the string "Sitepoint" the
+function would return the value "tniopetiS".
+
+There are a couple of other parts to this Ruby snippet worth noting.
+
+Firstly, our custom `reverse` function is defined inside of the `module`
+`Sass:Script:Functions`. This is how we are extending the functionality
+of Sass with our own custom function.
+
+The second is that before ending the snippet we have to `declare` the
+new `:reverse` function and the arguments it accepts in order for this
+new function to correctly be added to Sass.
+
+So, we have our new function - how do we use it?
+
+
+## Using New Functionality
+
+To add our new function to Sass we need to create a ruby file. Once
+created we will run the Sass compiler and add an additional command line
+flag to include this new file to extend Sass.
+
+I have a simple project here with an assets folder which contains
+a folder for my `scss` and compiled `css`. The `scss` is very sparse and
+just contains a handful of styles that outputs the word "Sitepoint" into
+the body of the page via a pseudo element.
+
+	body {
+		display:flex;
+		height:100vh;
+		margin:0;
+
+		&:after {
+			content:"Sitepoint";
+
+			display:block;
+			margin:auto;
+
+			color:#339bcb;
+			font-size:3em;
+			font-family:sans-serif;
+		}
+	}
+
+We're going to extend Sass with our reverse function to reverse the
+content in this pseudo element.
+
+The first thing to do is create a folder for the new Sass function.
+I'll create a `lib` folder within the `assets` folder and within that
+create a `reverse.rb` file to hold our Ruby function.
+
+Within this file we first need to `require sass` to enable us to extend
+its functionality. We then add our custom function to the Sass module.
+
+	require 'sass'
+
+	module Sass::Script::Functions
+	  def reverse(string)
+	    assert_type string, :String
+	    Sass::Script::Value::String.new(string.value.reverse)
+	  end
+	  declare :reverse, [:string]
+	end
+
+After saving the file we can now update our Sass code to use this new
+function.
+
+	&:after {
+		content:"#{ reverse( 'Sitepoint' ) }";
+
+This uses string interpolation to add the result of running the reverse
+function on the string 'Sitepoint'.
+
+If we try to run the Sass compiler now we don't get any errors but when
+our styles compile we see the function call to `reverse` rendered in the
+browser. Not ideal. 
+
+To complete the process of extending Sass we need to include our custom
+ruby file at compile time.
+
+To do this, head to your terminal and stop the Sass compiler if it's
+already running. To include our ruby file with the reverse function (or
+any other custom ruby file) we need to change the way we run the Sass
+command.
+
+If we wanted to run the Sass compiler once, we'd use a command such as
+
+	sass assets/scss/style.scss:assets/css/style.css
+
+To include our custom function we add a `-r` flag and the path to our
+file:
+
+	sass assets/scss/style.scss:assets/css/style.css -r ./assets/lib/reverse.rb
+
+This loads our new function into the Sass functions module and our
+styles compile without error. If we take a look in the browser we should
+see the content reversed.
+
+While this is a somewhat trivial example, and it's unlikely that you'll
+want to use this reverse function in all of your future projects, this
+concept of extending Sass is a really interesting one. The Sass language
+is already incredibly powerful but if you want or need to full power of
+a programming language like Ruby to perform complex functionality then
+this could open up some interesting possibilities.

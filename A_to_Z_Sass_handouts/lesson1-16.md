@@ -1,68 +1,229 @@
-Today, we're gonna talk about Sass performance. This is a tricky subject and one that is often very specific to each individual project. It's dependencies, the local or production environment and the scale of the project, and perhaps even the scale of the team. However, performance is a really important subject.
+![](headings/1.16.png)
 
-So, it's something I wanted to try and tackle. That being said, I wouldn't call myself a performance expert. I'm sure there are people much more qualified to talk about much more technical applications of performance. But we're gonna cover it from a Sass and CSS side of things today.
+Today we're going to talk about Sass performance. This is a tricky
+subject and one that is often very specific to each individual project,
+its dependencies, the local or production environment and the scale of
+the project.
 
-And to do so, we're gonna break this topic down into two main areas of discussion. How to improve compiler performance for improved developer happiness and faster workflow. And how to write Sass code which outputs clean and performant CSS. Having a solid workflow when writing code is really important to make sure that you can work as quickly as you need to or as you want to.
+However, performance is an important subject so it's something I wanted
+to try and tackle.
 
-Sass needs to be compiled into CSS before it can be read by the browser, as I'm sure you're aware. And this compile step can sometimes become a little bit of a bottleneck and actually starts slowing down your development. On a recent client project, which I inherited from another agency in a pretty terrible shape of being honest, the compile time for the Sass was frequently taking over 14 seconds.
 
-On a similar scale project on my own, compiling the styles takes less than one second. So why was there so much difference here? On the client project which will remain nameless, it had the following set up. It was using Ruby Sass, we were using the Compass mixin library.
+## Improving Compiler Performance
 
-There were two separate compiled stylesheets, there were 67 partials, and we were using the Grunt task runner for actually running the compiler. On my personal project, which is an online food website for ethical and sustainable food, you can find it at thefoodrush.com, it has the following setup. We're using Node Sass, we're using Autoprefixer.
+Having a solid workflow when writing code is really important to make
+sure you can work as quickly as you need to.
 
-There's one compiled stylesheet. And at the time of this recording, there's 42 Sass partials and we're using Gulp for compiling the Sass. While the client project has more partials and one more compiled stylesheet, I believe that the major bottleneck in this compile process was using the compass library and the use of Ruby Sass.
+Sass needs to be compiled into CSS before it can be read by the browser
+and this compile step can sometimes become a bit of a bottle neck and
+start slowing down your development.
 
-Not that there's anything wrong with Ruby Sass, but it runs a lot slower than Node Sass, which is what I'm using on my personal project. Compass is a library full of all sorts of handy mixins and functions for working with Sass. A little bit like Neat and Bourbon that we looked at in a previous video in this series.
+On a recent client project (which I inherited from an agency in pretty
+terrible shape) compile time for the styles was frequently taking over
+14 seconds. On a similar scale project of my own, styles take
+less than 1 second to compile. So why such a difference?
 
-The majority of the Compass library provides CSS3 mixins for handling vendor prefixes across different browsers. Compass modules could be loaded on a case-by-case basis. Or you can include the whole library in one go, which was done on the client project. The only Compass mixins that were being used were for transitions, transform, opacity, and box sizing.
+The Client Project (which shall remain nameless) has the following
+setup:
 
-And these are now widely supported without any vendor prefixes at all. And if prefixes where needed to support particular range of browsers, it wouldn't be too hard to add these manually even for just these four properties. We could create a custom mixin as needed or we could use an automated tool for prefixing like auto-prefixer.
+* Ruby Sass 
+* Compass mixin library
+* 2 compiled stylesheets
+* 67 partials
+* Grunt task for compiling
 
-The second change to improve the performance of compiling this project would be to change from using Ruby Sass to LibSass, which is often done through the Node Sass wrapper as part of either Gulp task or a Grunt task. LibSass is a C or C++ port of the original Ruby Sass engine, and it runs incredibly fast.
+My Personal Project (The Food Rush food tech magazine) has the following
+setup:
 
-If you refer back to the episode about Grunt and Gulp, you'll be able to see an example of the difference in compile time for exactly the same code. The Ruby Sass with Grunt compiled in 1.5 seconds, and the Node Sass with Gulp compiled in 10 milliseconds. Now this isn't anything to do with the difference between Grunt and Gulp, it's the difference between Ruby Sass and Node Sass.
+* Node Sass
+* Autoprefixer
+* 1 compiled stylesheet
+* 42 partials
+* Gulp task for compiling
 
-But go and check out that video for practical step by step instructions on how to use and set up either Grant or Gulp to compile your Sass. For more details and some more cold hard fact and figures about compile times of various different versions of Sass and other pre-processors, there's a post on Opinionated Programmer, which is really great.
+While the client project has 25 more partials and 1 more compiled
+stylesheet, I believe the major bottleneck in this compile process is
+the Compass library and the use of Ruby Sass.
 
-And there is a link on the screen here, and there'll be a link in the description as well. So to wrap up this part of the discussion, there are really two takeaways. To improve the performance of your compiler, reduce the amount of plugins or libraries that are used in the project.
+Compass is a library full of all sorts of handy mixins and functions for
+working with Sass. The majority of which provides CSS3 mixins for
+handling vendor prefixes across different browsers. Compass modules can
+be loaded on a case by case basis or you can include the whole library
+(as has been done on this project) by importing it in your compiled
+stylesheets:
 
-And try LibSass or one of its common wrappers for a super fast compile time. Moving away from the idea of performance in terms of speed and efficiency of our workflow, let's turn our attention to writing Sass that compiles to compact, clean and clear CSS. I've spent many hours writing CSS and have tried a number of modular coding techniques, naming conventions, methodologies like OOCSS and SMACSS.
+{% highlight scss %}
+@import 'compass';
+{% endhighlight %}
 
-And I've experimented with both @extend and @mixin a lot. It would probably take hours to go into fine detail about what I've learned on the topic. And so I've tried to distill it down into five tips for writing Sass that outputs CSS without too much bloat. Firstly, read your compiled CSS.
+Having analysed the whole repository for this client project, the only Compass
+mixins being used are for:
 
-When optimizing anything, it's important to know what you're optimizing. Being aware of the CSS that's being generated from your Sass is sometimes all you need to know whether your generating code is compact and lightweight, or a bit of a bloated mess. If you're working on a large project, reading through the whole compiled stylesheet might be a little bit impossible.
+* transitions
+* transform
+* opacity
+* box-sizing
 
-So you could just experiment with some snippets of code on a Sass meister gist, suggest or on code pen just to check the difference between the two. But it's really useful to be aware of the CSS code that your Sass is generating. The second tip is to avoid overqualified selectors and avoid nesting.
+These are widely supported without any vendor prefixes. If prefixes were
+needed to support a particular range of browsers, it wouldn't be hard to
+add these manually, create a custom mixin as needed or use an automated
+tool for prefixing like Autoprefixer.
 
-Specificity is something to keep in mind when writing Sass or CSS. The more specific the selectors you write, the more specific the selectors you'll need to override previously declared styles. This can lead to many more lines of code and can make life really difficult for yourself and your other members of your team.
+The second change to improve the performance of compiling this project
+would be to switch from using Ruby Sass to Libsass (often done through
+the node-sass wrapper as part of a Gulp task).
 
-Avoid over qualified selectors like a.button or div.main, as this limits the reuse of these styles. If you think that you need to modify existing styles for specific elements, adding a modifier class is usually a better approach than differentiating by element type, which can be very limiting. It's almost impossible to read a blog post or watch a video about Sass without hearing about the warnings about don't nest too deeply, but it's worth reiterating.
+Libsass is a C/C++ port of the original Ruby Sass engine and runs
+incredibly fast. If you refer back to the episode about Grunt and Gulp,
+you'll see the difference in compile time for exactly the same code:
+Ruby Sass with Grunt compiled in __1.519 seconds__ and Node Sass with Gulp
+compiled in __10 mili-seconds__. Check out this video for practical step
+by step instructions to use Grunt or Gulp to compile your Sass (I'd
+recommend Gulp, but that's just my personal preference these days).
 
-Don't nest too deeply. Nesting selectors can lead you into a false sense of security as you're only typing something very short, but then these selectors compile into something much longer, and much more complex, if you've used a lot of nesting. I once inherited a project which had a home page file, which was styled just for the home page, and it had a thousand lines of Sass.
+For more details and some cold hard numbers about compile times of
+various versions of Sass and other preprocessors, take a look at this
+post on [Opinionated Programmer](https://www.solitr.com/blog/2014/01/css-preprocessor-benchmark/).
 
-And the first line of code was body.homepage and every other line of code was nested inside of that. Which means that these 1,000 lines of codes would only ever apply to a page whose body element had a class of homepage. To my mind, this is the complete opposite of a modular and reusable code, and it was an absolute nightmare to maintain.
+It's worth mentioning that Libsass doesn't support every single Sass
+feature that's in Ruby Sass. But in my experience I haven't found this
+to be an issue and have yet to run into a Ruby Sass feature that's not
+supported in Libsass that's been a blocker on any project so far.
 
-Tip 3 is you be wary of mixins, but don't worry about it too much. Mixins are used to generate similar patterns of code throughout a code base. And they often get a bad reputation because they generate multiple lines of identical or almost identical code, depending on how they're structured and how they're used.
+So to wrap up this part of the discussion, there are really two
+takeaways:
 
-My advice is to be aware of the mixins that you use to ensure that they don't generate masses and masses of unnecessary duplication. But don't worry about them too much, because this kind of duplication can be heavily compressed as long as your server has gzip turned on. And that apparent bloated CSS will actually end up very compact.
+To improve the performance of your compiler, __reduce the amount of
+plugins and/or libraries__ used in a project and __try Libsass__ for
+super-fast compile times.
 
-Tip number 4 is to avoid using extend. This has almost become a Sass meme in the front end development world. It's a popular buzz phrase among Sass users, which is, don't use extend. We've talked about it in a previous episode, and we even talked about the pros and cons length in that episode.
 
-So without revisiting the exact same arguments, to improve the performance of your compile times and your generated CSS, I would generally avoid using the extend for anything other than extending utility classes like clear fix. Tip number 5 is to consider using multiple compiled stylesheets. This can sometimes seem a little bit contradictory to the usual advice which is import one single file which is a concatenation of multiple files into one to reduce HTTP request.
+## Optimising CSS for Performance
 
-Whilst that can be good advice with the advent of HTTP 2, this is perhaps less of a concern. But in some cases, it's better for performance to have multiple compiled stylesheets that are loaded on different pages of a large website or application. Let me explain what I mean by that.
+Moving away from thinking about performance in terms of speed and
+efficientcy in our workflow, let's turn our attention to writing Sass
+that compiles to compact, clean and clear CSS.
 
-So imagine you have a site with a whole load of content and informational pages, and maybe an online shop. The shop has got a whole load of pages, and a whole load of templates, and a whole load of steps for the checkout process for viewing the products, putting them into your basket, going through the checkout, all that kind of thing.
+I've spent many hours writing CSS and have tried a number of modular
+coding techniques, naming conventions, methodologies like OOCSS and
+SMACSS and experimented with both `@extend` and `@mixin` a lot.
 
-And these pages, the shop pages, would no doubt have a significant amount of custom components and styles that aren't used throughout the rest of the website. And these shop pages are probably only seen by a small percentage of the site's visitors, if the shop is just one part of the larger site full of content.
+It would probably take hours to go into fine detail about what I've
+learned on the topic so I've tried to distill it down into 5 tips
+for writing Sass that outputs CSS without too much bloat.
 
-So conventional wisdom might say that combining scripts and stylesheets into as few files as possible will reduce HTTP requests. Which is true, but if your single stylesheet is full of code that only gets seen by a small number of your users, would it not make more sense to separate that out into two smaller stylesheets?
+### Tip 1: Read your compiled CSS
 
-This can also have caching benefits too. If you got one massive stylesheet, and you change a single line or a single property, then you have to break the cash for that file, meaning, that all of the users need to re download all of it. Whereas, if you have stylesheets that are split up into different files for different sections of the website, if you need to make a small change to just the shop, then only people who visit the shop pages and request the shop CSS file will need to redownload that.
+When optimising anything, it's important to know what you're optimising.
+Being aware of the CSS that's being generated from your Sass is
+sometimes all you need to know whether your generated code is compact
+and lightweight or bloated and a bit of a mess.
 
-So there can be some benefits here. One last bonus tip, don't forget that making CSS perform better, either for developer happiness or for your users, is kind of a micro optimisation. Get the low hanging fruit out of the way first and then tackle things like CSS optimisation second.
+If you're working on a large project, reading through the whole compiled
+stylesheet might be impossible so why not just experiment with some
+snippets of code on Sassmeister or Codepen to check the compiled output.
 
-Those low hanging fruit would be things like turning on Gzip on the server, making sure all the images are compressed. Make sure your leveraging caching, and make sure you compress and minify all of your assets, and even consider using a CDN. So there we have it, a selection of a performance related tips.
 
-These aren't necessarily the Holy Grail of making a super fast website. But they're certainly some good things to keep in mind when you're writing your code, or working as part of a wider team.
+### Tip 2: Avoid over qualified selectors and nesting
 
+Specificity is something to keep in mind when writing Sass or CSS. The
+more specific selectors you write, the more specific selectors you'll
+need to override previously declared styles. This can lead to many more
+lines of code and can make life difficult for yourself and/or other
+members of your team.
+
+Avoid over-qualified selectors like `a.button` or `div.main` as this
+limits the reuse of these styles. If you think you need to modify
+existing styles for specific elements, adding a modifier class is
+a better approach than differentiating by element type which can be very
+limiting.
+
+It's almost impossible to read a blog post or watch a video about Sass
+without hearing the warnings about "don't nest too deeply" but it's
+worth reiterating: don't nest too deeply.
+
+Nesting selectors can lead you into a false sense of security as you're
+only typing something very short but they can compile into something
+very long and complex.
+
+I once inherited a project which had a `_homepage.scss` file containing
+over 1000 lines of Sass. The first line of code was `body.homepage {` and
+every other line of code was nested inside that. This means that these
+1000 lines of code would only ever apply to a page who's `body` element
+had a class of `homepage`. This is the opposite of modular and reusabel
+code and was a nightmare to maintain.
+
+
+### Tip 3: Be wary of mixins (but don't worry about them too much)
+
+We've looked at mixins in previous videos and I cover them in detail
+in my Up and Running with Sass ebook.
+
+Mixins are used to generate similar patterns of code throughout
+a codebase. They often get a bad reputation because they generate
+multiple lines of (almost) identical code.
+
+My advice is to be aware of the mixins you use to ensure they don't
+generate unnecessary duplication.
+
+However, don't worry about this too much as this kind of duplication can
+be heavily compressed with gzip and the apparent "bloated CSS" can
+actually end up very compact.
+
+### Tip 4: Avoid extend
+
+Yet another favourite buzz-phrase among Sass users is "don't use
+extend". We covered `@extend` in [Episode 5](http://www.atozsass.com/e)
+and talked about it's pros and cons at length.
+
+Without revisting the exact same argument, to imrpove the performance of
+your compile times and your generated CSS I would avoid using `@extend`
+for anything other than utility classes.
+
+
+### Tip 5: Consider using multiple compiled stylesheets
+
+Finally, a tip that may seem a little contradictory of the ususal advice
+about the importance of concattenating multiple files into one to reduce
+http requests.
+
+In some cases it may be better for performance to have multiple compiled
+stylesheets that are loaded on different pages of a large site or
+application.
+
+Let me explain.
+
+Imagine you have a site with a load of content and informational pages
+and an online shop. The shop has a number of pages and templates that
+show off products, product detail pages and all the various steps for
+adding things to a basket, checkout process, thank you pages and all
+that jazz. 
+
+These pages would no doubt have a significant amount of
+custom components and styles that aren't used throughout the site. 
+
+These pages are probably only seen by a small percentage of the site's
+visitors.
+
+Conventional wisdom says combine scripts and stylesheets into as few
+files as possible to reduce http requests. However, if your single
+stylesheet is full of code that only gets used by a small percentage of
+your users, would it not make more sense to seperate it out into two
+smaller stylesheets?
+
+This also has caching benefits too. With one massive stylesheet,
+a change in the CSS to any distinct part of the website will break the
+cache on the single file meaning all users need to re-download it. If
+a small change is made to the ecommerce styles then the main stylesheet
+will remain cached and only customers to the shop will need to
+re-download the updated stylesheet.
+
+
+## Bonus Performance Tips
+
+Don't forget that making CSS perform better (either for developer
+happiness or for users) is kind of a micro optimisation. 
+
+Get the low hanging fruit out of the way first: turn on gzip, compress
+images, leverage caching, compress and minify assets and consider using
+CDNs.

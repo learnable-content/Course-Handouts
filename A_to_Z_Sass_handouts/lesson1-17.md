@@ -1,40 +1,171 @@
-The process of making a design responsive is complex and often requires a whole load of new styles for different size devices to wrangle a design into shape. When working on a responsive project, Sass has a number of useful features that can make our lives easier and make our code more maintainable.
+![](headings/1.17.png)
 
-In this video, we'll look at nested media queries in Sass, using variables in media queries, and creating a responsive mix-in to simplify your authored code. Media queries are one of the three pillars of responsive design. Fluid containers which are sized in percentages, flexible media, things like video and images that scale and don't breakout of their containers, and media queries.
+The process of making a design responsive is complex and often requires
+a whole load of new styling rules for different sized devices to 
+wrangle a design into shape.
 
-We covered media queries in a previous A to Z CSS video. But in essence, they're a way to create conditional CSS that only renders when certain characteristics about the device that is viewing the content are true. So we've got an example here. We've got a box with a blue background and then a media query that says, when the width of the page is above 500 pixels, the background will be red.
+When working with a responsive project, Sass has a number of useful
+features that can make our lives easier and make our code more
+maintainable.
 
-Even in this very short example, there is some duplication which Sass can help us reduce. Using Sass, we can nest the media query declaration inside the braces of the box class. And that avoids having to redeclare the class a second time. Nesting can be a contentious issue among developers due to the way it can mask specificity issues.
+## Nesting media queries
 
-But in this case, the nested media query doesn't add any additional specificity at all. And I personally find it a great way to make the code I write shorter and more readable as it group selectors and any related media queries together. When crafting responsive styles across a whole project, it's quite common to have a handful of major breakpoints.
+Media queries are one of the three pillars of responsive design:
 
-Where number of separate media queries all handle the styles for broad categories of different size devices. These might be described as small, medium and large or thought of as the devices themselves, mobile, tablet, desktop. Whichever form of naming you prefer, it's likely that you'll need to reference the same breakpoint sizes a number of different times potentially across multiple different files.
+* Fluid containers (sized in percentages)
+* Flexible media (videos and images that scale and don't break out of
+  their containers)
+* Media Queries
 
-And this is a perfect opportunity for using a variable. So let's have a look at an example. I got a simple page design here with a couple of media queries to handle the breakpoints between small and medium screens. The value of 500 pixels and 800 pixels have been used in a couple different places.
+We covered media queries in a previous AtoZ CSS video but in essence
+they are a way to create conditional CSS that only renders when certain
+characteristics about the device being used to view the content are
+true.
 
-Now, I could have used any length unit here, could have used ems or rems or pixels. Pictures and pixels just for the sake of simplicity as the numbers are often a bit more relatable. We'll look at converting two relative units in a little bit later on in this video.
+	.box { background: blue; }
 
-To make these pixel values even more meaningful and much easier to reuse, let's create a variable to reference each of our breakpoints. So I've got a media small for the 500 pixels and media medium for 800-pixel breakpoint. And I like to name my variables like this with a naming convention just to add a little bit of extra meaning.
+	@media screen and ( min-width:500px ) {
+		.box { background: red; }
+	}
 
-But as with all variables, you can name these however you like. If you have your own preference, go ahead and use that. To use these variables, we might attempt to replace the pixel value in the media query just like we would with any other variables, just like in the example here where I've got background:$brand-color.
+In this example, my boxes will have a blue background by default but if
+the width of the screen is greater than a minimum width of 500px, they
+will be red.
 
-But this doesn't work and actually throws an error. Because the variable is being used within another string of characters for the media query declaration, we need to use Sass interpolation instead. Using interpolation, which you can learn more about in the previous episode, episode 9, I think, of this series, the variable expression is evaluated within the surrounding media query declaration.
+Even in this very short example there is some duplication which Sass can
+help us reduce. Using Sass we can nest the media query declaration
+inside the braces of the `.box` class and avoid having to redeclare the
+class a second time.
 
-To complete this example, we can replace all other instances of our pixel breakpoints with variables. This is an improvement on the raw CSS approach and we can now adjust the point at which our design responds to a small or medium screen just by adjusting the variable value. And this would then ripple out across of the different places that that's being used.
+	.box {
+		background:blue;
 
-However, there's still a lot of duplication in a lot of the media queries themselves. Which we can address in the final section. To streamline the process of working with media queries and to reduce the amount of code that you have to type, just always a good thing It's possible to create a mixin to handle the outputting the media query itself.
+		@media screen and ( min-width:500px ) {
+			background:red;
+		}
+	}
 
-So we can create a very flexible mixin, which allows us to create all sorts of different break points. We can create a mixin that responds to different properties and different values that we pass in. To do that I'll create a respond to mixin, that takes two arguments. One for the value of the break point, which would be something like 500 pixels, or 800 pixels.
+Nesting is a contentious issue among developers due to the way it can
+mask specificity issues but in this case, the nested media query doesn't
+add any additional specificity and I personally find it a great way to 
+make the code I write shorter and more readable as it groups selectors
+and any related media queries together.
 
-And one for the CSS property that the media query should check, about the device, and therefore respond to. That might be the min-width property or the max-width property, it could even be a height based media query or aspect ratio based media query, some of that which is less common.
+## Using Variables in Media Queries
 
-Calling the content block within the body of the media query means that the styles that we pass into the mixing block, We'll only have B output when the media query is true. So to use this mixing we use the include directive, we specify the mixing name and passing the two variable values.
+When crafting responsive styles across a whole project it's common to
+have a handful of major breakpoints where a number of media queries
+handle styles for broad categories of different sized devices. 
 
-For example. Respond to 600 pixels min-width, and then set the width property to 100% at that break point. If you find that you most commonly use min-width or max-width media queries, depending on whether you're working mobile first or desktop first. You could modify the mixin slightly and create a default value for the property argument.
+These might be described as small, medium and large screens or though of
+as the size of device: mobile, tablet, desktop. Whichever you prefer,
+it's likely you'll need to reference the same breakpoint sizes a number
+of times. This is a perfect opportunity for using a variable.
 
-By adding this default value, if the mixin is called without the second argument, the default one will be use instead. So using @include respond-to ( 600px ) Will actually create a min-width media query for 600 pixels and output the width. If we take a look at the compiled CSS, we'll see the resulting output.
+Let's have a look at an example.
 
-We can take this mixin even further and convert any pixel based break points into Based or REM based values instead. If we use a pixels to Function. We can call that within the body of the mixin and then instead of outputting a pixel based media query, the result of our function expression will be added in place.
+I've got a simple page design here with a couple of media queries to
+handle the breakpoints between small and medium screens. The value 500px
+and 800px have been used in a couple of places.
 
-And we can ensure that we're using the relative units in all of our media queries going forward. When working with responsive design, there's always a lot to think about. So if Sass can help us reduce the amount of code we have to write, it can certainly help us speed up the process
+Now, I could have used any length unit here such as `em`, `rem` or `px`
+but I've chosen `px` for the sake of simplicitiy as the numbers are
+often more relatable. We'll look at converting to relative units in the
+next section.
 
+To make the pixel values more meaningful and easy to reuse, let's create
+a variable to reference our breakpoints.
+
+	$media-small: 500px;
+	$media-medium: 800px;
+
+I like to prefix my variables with a naming convention to add extra
+meaning but, as will all variables, you can name these however you
+prefer.
+
+To use the variables, we might attempt to replace the pixel values as we
+would with other variables such as my `$brand-color` used here.
+
+	@media screen and ( min-width: $media-small ) {
+		background:$brand-color;
+	}
+
+But this doesn't work and throws an error.
+
+Because the variable is being used within another string of characters
+for the media query declaration, we need to use Sass interpolation
+instead.
+
+	@media screen and ( min-width: #{ $media-small } ) {
+		// styles
+	}
+
+Using interpolation (which you can learn more about in Episode 9 of this
+series) the variable expression is evaluated within the surrounding
+media query declaration. To complete this example, we can replace all
+other instances of our pixel breakpoints with variables.
+
+This is an improvement on the raw CSS approach and we could now adjust
+the point at which our design responds to small or medium screens by
+adjusting the variable value.
+
+However, there's still a lot of duplication in the media queries
+themselves which we can address in the final section.
+
+## Responsive Mixins
+
+To streamline the process of working with media queries (and to reduce
+the the amount you have to type) it's possible to create a mixin to
+handle outputting the media query.
+
+So we can create a very flexible mixin that allows us to craft all sorts
+of different breakpoints, we can create a mixin that responds to
+different properties and values.
+
+I'll create a `respond-to` mixin that takes two arguments: one for the
+`$value` of the breakpoint - which could be something like `500px` or
+`800px` and one for the CSS property that the query should check about
+the device - such as `min-width` or `max-width`.
+
+	@mixin respond-to( $value, $property ) {
+		@media screen and ( #{ $property }: #{ $value } ) {
+			@content
+		}
+	}
+
+Calling the `@content` block within the body of the media query means
+that any styles passed into the mixin block will only be output when the
+media query is true.
+
+To use the mixin we use the `@include` directive, specify the mixin name
+and pass in the two variable values. For example
+
+	@include respond-to( 600px, 'min-width' ) {
+		width:100%;
+	}
+
+If you find that you most commonly use `min-width` or `max-width`
+queries, you can create a default value for the property argument:
+
+	@mixin respond-to( $value, $property:'min-width' ) {
+		@media screen and ( #{ $property }: #{ $value } ) {
+			@content
+		}
+	}
+
+By adding the default value, if the mixin is called without the second
+argument, the default will be used. 
+
+	@include respond-to( 600px ) {
+		width:100%;
+	}
+
+If we look at the compild CSS, you can see the resulting output.
+
+	@media screen and ( min-width: 600px ) {
+		width:100%;
+	}
+
+When working with responsive design there's always a lot to think about
+so if Sass can help us reduce the amount of code we have to write, it
+can certainly help speed up the process.

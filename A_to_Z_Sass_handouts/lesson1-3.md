@@ -1,28 +1,230 @@
-**Color** is hugely important for adding life and visual interest to a project and is an invaluable tool for highlighting parts of the interface that a user can interact with. In this practical episode we're going to talk all about manipulating colors programatically with Sass. It's quite common for a project to use a palette of colors for headings, body copy, links and buttons among other things.
+![](headings/1.3.png)
 
-When designing the visual style of the site, tools like Photoshop or Sketch may be used. But sometimes, working in the browser is the fastest way to experiment as all the colors and the fonts or the type sizes can be changed all at once by leveraging Sass variables. Often when experimenting with color, a front-end designer may want to just tweak the colors a little bit to get the right tone or the right amount of contrast.
+**Color** is hugely important for adding life and visual interest to a project and is an invaluable tool for highlighting parts of the interface that a user can interact with. In this practical episode we're going to talk all about manipulating colors programatically with Sass. 
 
-Sass has got a number of color functions built into it that can help do just that. Each color function takes a base color, which can be any valid color format, such as a name or a hex code or an rgb value or an hsl value or even another Sass variable. That base color can then be modified by a certain amount, often declared as a percentage.
+It's quite common for a project to use a palette of colours for
+headings, body copy, links and buttons.
 
-Let's illustrate some of the most useful color functions with a practical example. Here I've got a box with a background color, which is defined by the variable $base-color, which at the moment is set to AtoZ CSS pink.
+When designing the visual style of a site, tools like Photoshop or
+Sketch may be used but sometimes, working in the browser is the fastest
+way to experiment as all the colours or fonts or type sizes can be
+changed at once by leveraging Sass variables.
 
-If I wanted a slightly lighter shade of pink, I can use the Sass `lighten` function. Or if I wanted to darken it slightly, I can use the `darken` function. The color could be more saturated or even desaturated, too. We have other options available as well. We could invert the color, or make it grayscale, or turn it into its complementary color, which is its opposite color on the color wheel.
+Often when experimenting with colour, a front-end designer may want to
+tweak colours to get the just the right tone or contrast. Sass has
+a number of colour functions built into it that can help do just that.
 
-Finally, we have a number of color functions available for making a color more transparent or more opaque. And these take a decimal number rather than a percentage, just like when setting the alpha channel in rgba or when setting a opacity.
+Each colour function takes a base colour - which can be any valid colour
+format such as a keyword, hex code, rgb value, hsl value or a variable
+- and the modify it by a certain amount (often as a percentage).
 
-It's not uncommon to want to make multiple modifications to a color such as lightening it and increasing the saturation. Or transparentizing it and darkening it at the same time. And this can be achieved by putting functions inside of other functions.
+{% highlight scss%}
+function( $color, $amount );
+{% endhighlight %}
 
-Let's lighten and saturate a color at the same time:
+Let's illustrate some of the most useful colour functions with an
+example. Here I have a box with a background colour which is defined by
+the variable `$base-color`.
 
-You maybe thinking that the designs that you work with, or maybe even the designs that you create, are much stricter about their colors than letting them be arbitrarily darkened or lightened or saturated or desaturated within the code, and that's the third point. But there are some occasions when modifying a color is much quicker and much more flexible than endlessly using an eyedropper tool in your favorite graphics package.
+{% highlight scss%}
+$base-color: #cc3f85;
 
-By coming up with a system of colors, where a base is tweaked a little bit lighter or darker or more saturated or less saturated, can help us work in this component driven way. And a great example of this is when working with gradients and borders and drop shadows.
+.box {
+	background: $base-color;
+}
+{% endhighlight %}
 
-Here is another example:
+I could lighten the colour slightly with the `lighten()` function.
 
-I've got a button with a solid background color and a bit of padding to give the text inside some breathing room. To give the button a bit more detailing, we could perhaps add a border, and a bit of shine with a gradient and some subtle shadows.
+{% highlight scss%}
+.box {
+	background: lighten( $base-color, 20% );
+}
+{% endhighlight %}
 
-Instead of picking colors out of a design file, let's use Sass to take the base color and modify it slightly.
+Or darken the base colour by a certain percentage:
 
-To make this code even more flexible and allow us to generate all sorts of different colored buttons, we can turn our button class into a button mixin, which accepts a parameter for the base color that's gonna be used. Now this mixin can be used to generate buttons of all different colors by including them as needed:
+{% highlight scss%}
+.box {
+	background: darken( $base-color, 20% );
+}
+{% endhighlight %}
 
+The colour could be more saturated or desaturated too:
+
+{% highlight scss%}
+.box {
+	background: saturate( $base-color, 20% );
+	background: desaturate( $base-color, 20% );
+}
+{% endhighlight %}
+
+The colour could be inverted, made grayscale or turned into its
+complimentary colour (which is its opposite colour on the colour wheel).
+
+{% highlight scss%}
+.box {
+	background: invert( $base-color );
+	background: grayscale( $base-color );
+	background: complement( $base-color );
+}
+{% endhighlight %}
+
+There are a number of functions available for making a colour more
+transparent or more opaque which take a decimal rather than a percentage
+- just like when setting the alpha channel in `rgba` or `opacity`.
+
+{% highlight scss%}
+.box {
+	background: transparentize( $base-color, 0.5 );
+	background: opacify( $base-color, 0.3 );
+	background: rgba( $base-color, 0.4 );
+}
+{% endhighlight %}
+
+
+
+## Multiple Colour Functions
+
+It's not uncommon to want to make multiple modifications to a colour
+such as lightening and increasing saturation; or transparentizing and
+darkening. This can be achieved by putting functions inside of other
+functions. Let's take a look at lightening and saturating a colour
+together:
+
+First let's lighten the `$base-color`
+
+{% highlight scss%}
+.box {
+	background: lighten( $base-color, 20% );
+}
+{% endhighlight %}
+
+This can the be saturated by wrapping the saturate function around the
+lighten function. Think of the colour being passed to `saturate` is the
+result of running the `lighten` function.
+
+{% highlight scss%}
+.box {
+	background: saturate( lighten( $base-color, 20% ), 10% );
+}
+{% endhighlight %}
+
+If you find this a bit awkward to read, you could create a variable for
+the lightened colour and just pass that to `saturate`:
+
+{% highlight scss%}
+$lightened-color: lighten( $base-color, 20% );
+
+.box {
+	background: saturate( $lightened-color, 10% );
+}
+{% endhighlight %}
+
+I personally prefer the first, one line option because it keeps
+everything together and reduces the need for additional global
+variables.
+
+
+
+## Practical use case for colour functions
+
+You may be thinking that the designs you work with are much stricter
+about colours than letting them be arbitrarily darkened or lightened in
+the code - and that's a fair point.
+
+But there are some occasions when modifying a colour is much quicker and
+much more flexible than endlessly using a eyedropper tool in your
+favourite graphics package.
+
+A great example of this is when working with gradients, borders and
+shadows.
+
+I've got a button here with a solid background colour and a bit of
+padding to give the text some breathing room. To give the button a bit
+more detailing, we could perhaps add a border and a bit of a shine with
+a gradient and some subtle shadows. This might sound like some kind of
+dated web 2.0 horror show but we can handle this tastefully - I'm
+convinced that gradients will be back in fashion soon, just you wait!
+
+{% highlight css %}
+.button {
+	padding:0.5em 2em;
+
+	color:#222;
+	background:lightblue;
+}
+{% endhighlight %}
+
+So to add these features, instead of picking colours out of a design
+file, let's use Sass.
+
+I'll start by making the existing background colour a variable and then
+add a thin border which is a darker version of the original blue.
+
+{% highlight css %}
+$color-button: lightblue;
+.button {
+	background:$color-button;
+	border:1px solid darken( $color-button, 15% );
+}
+{% endhighlight %}
+
+To give a bit more depth to the button, I'll add a light blue inset
+shadow at the top of button:
+
+{% highlight css %}
+$color-button: lightblue;
+.button {
+	background:$color-button;
+	border:1px solid darken( $color-button, 15% );
+	box-shadow: inset 0 1px lighten( $color-button, 20% );
+}
+{% endhighlight %}
+
+And then wrap everything up with a subtle gradient:
+
+{% highlight css %}
+$color-button: lightblue;
+.button {
+	background: linear-gradient( $color-button, darken( $color-button, 15% ) );
+	border:1px solid darken( $color-button, 15% );
+	box-shadow: inset 0 1px 1px lighten( $color-button, 20% );
+}
+{% endhighlight %}
+
+Now imagine we want to change the button colour. Because we've created a 
+system for styling buttons where all the colours are modified from
+a single base colour, we have nothing else to do other than change the
+value of our variable.
+
+To make this code even more flexible and allow us to generate all sorts
+of different coloured buttons, we could turn our button class into
+a button mixin.
+
+{% highlight scss %}
+@mixin button( $color-button ) {
+	padding:1em;
+	background:linear-gradient( $color-button, darken( $color-button, 15% ));
+	border:1px solid darken( $color-button, 15% );
+	box-shadow: inset 0 1px 1px lighten( $color-button, 20% );
+}
+{% endhighlight %}
+
+Now this mixin can be used to generate buttons of all different colours
+by including them as needed.
+
+{% highlight scss %}
+.button {
+	@include button( lightblue );
+}
+.button--pink {
+	@include button( hotpink );
+}
+{% endhighlight %}
+
+If you're new to Sass and want more info about variables and mixins and
+other Sass features, do check out my Up and Running with Sass ebook
+which will give you a practical guide to the Sass fundamentals along
+with exercises, actionable advice and best practices for working with
+Sass.
