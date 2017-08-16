@@ -1,2 +1,20 @@
-# Course-Handouts
-Course handout repository. To browse handouts for a specific course choose the corresponding branch.
+# Index for the CSS Architecture course
+
+* [Lesson 1-1](CSS_Architecture_handouts/lesson1-1.md)
+* [Lesson 1-2](CSS_Architecture_handouts/lesson1-2.md)
+* [Lesson 2-1](CSS_Architecture_handouts/lesson2-1.md)
+* [Lesson 2-2](CSS_Architecture_handouts/lesson2-2.md)
+* [Lesson 2-3](CSS_Architecture_handouts/lesson2-3.md)
+* [Lesson 3-1](CSS_Architecture_handouts/lesson3-1.md)
+* [Lesson 3-2](CSS_Architecture_handouts/lesson3-2.md)
+* [Lesson 3-3](CSS_Architecture_handouts/lesson3-3.md)
+* [Lesson 3-4](CSS_Architecture_handouts/lesson3-4.md)
+* [Lesson 3-5](CSS_Architecture_handouts/lesson3-5.md)
+* [Lesson 3-6](CSS_Architecture_handouts/lesson3-6.md)
+* [Lesson 4-1](CSS_Architecture_handouts/lesson4-1.md)
+* [Lesson 4-2](CSS_Architecture_handouts/lesson4-2.md)
+* [Lesson 5-1](CSS_Architecture_handouts/lesson5-1.md)
+* [Lesson 5-2](CSS_Architecture_handouts/lesson5-2.md)
+* [Lesson 5-3](CSS_Architecture_handouts/lesson5-3.md)
+* [Lesson 5-4](CSS_Architecture_handouts/lesson5-4.md)
+* [Lesson 6-1](CSS_Architecture_handouts/lesson6-1.md)
